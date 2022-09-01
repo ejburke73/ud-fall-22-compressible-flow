@@ -12,6 +12,7 @@
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{bookmark}
 \usepackage{listing}
+\usepackage{siunitx}
 %\usepackage{appendix}
 \usepackage{xcolor}
 \usepackage{siunitx}
@@ -505,7 +506,7 @@
 			\begin{equation*}
 				h(T,\nu) = e(T,\nu) + p\nu
 			\end{equation*}
-			For a TPG, intermolecular forces are ignored, and $h$ can be expressed as a function of $T$ only:
+			For a TPG, chemical reactions in the flow are neglected, and $h$ can be expressed as a function of $T$ only:
 			\begin{equation*}
 				h(T) = e(T) + p\nu
 			\end{equation*}
@@ -582,27 +583,23 @@
 	\newpage
 	
 	\section*{Problem 3}
+	This problem focuses on the Air Force Research Laboratory's (AFRL) Mach-6 Ludwieg Tube located at Wright-Patterson Air Force Base. 
 	\addcontentsline{toc}{section}{Problem 3}
 	\begin{enumerate}[label=(\alph*)]
-		\item 
+		\item Researchers utilize isentropic relations to compare pressure, density, and temperature at various locations in the tunnel. They do this by experimentally measuring the air pressure at discrete points on the walls of the tunnel/nozzle. Make you case for why this is valid. In addition, make the case of a reviewer of this paper who might try to argue why this is not valid.
 		\begin{enumerate}[label=\arabic*.]
 		\addcontentsline{toc}{subsection}{(a)}
-			\item{\textbf{Givens}}\\
-			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
-			\item{\textbf{Assumptions}}\\
-			\addcontentsline{toc}{subsubsection}{Assumptions}
-			sdf
-			\item{\textbf{Solution}}\\
-			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
+			\item{\textbf{Discussion}}
+
+			\addcontentsline{toc}{subsubsection}{Discussion}
 		\end{enumerate}
-		\item 
+		\item Plot the pressure, density, and temperature of the flow in the test section versus the test time $t$, using data from the .xlsx file.
 		\addcontentsline{toc}{subsection}{(b)}
 		\begin{enumerate}[label=\arabic*.]
-			\item{\textbf{Givens}}\\
+			\item{\textbf{Givens}}
+			asd
 			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
+			
 			\item{\textbf{Assumptions}}\\
 			\addcontentsline{toc}{subsubsection}{Assumptions}
 			sdf
@@ -610,7 +607,7 @@
 			\addcontentsline{toc}{subsubsection}{Solution}
 			sdf
 		\end{enumerate}
-			\item 
+			\item Generally useful wind-tunnel data is collected n the test section between $25 < t < 75 \  ms$. How "steady" is the pressure during that period (i.e., what is the standard deviation about the mean value during that time)?
 			\addcontentsline{toc}{subsection}{(c)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
@@ -623,7 +620,11 @@
 			\addcontentsline{toc}{subsubsection}{Solution}
 			sdf
 		\end{enumerate}
-			\item 
+			\item At $t=50 \ \unit{\milli\second}$, what is the entropy difference between the upstream and test-section air? Recall,
+			\begin{equation*}
+				s_2 - s_1 = c_p \ln(\frac{T_2}{T_1}) - R \ln(\frac{p_2}{p_1}) \,.
+			\end{equation*}
+			You may use $c_p = 1000 \ \unit{\joule/\kilogram.\kelvin}$ and $R = 287 \ \unit{\joule/\kilogram.\kelvin}$. Does this make sense? Why or why not?
 			\addcontentsline{toc}{subsection}{(d)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
@@ -636,7 +637,10 @@
 			\addcontentsline{toc}{subsubsection}{Solution}
 			sdf
 		\end{enumerate}
-			\item 
+			\item What do the isentropic relations show happens to the temperature of the flow as it expands to Mach-6? Look up the liquefaction temperature of air. What is it in Kelvin? With
+			this knowledge, why do you think the air accelerated through high-speed wind tunnels is
+			heated before every test?\\
+			With an upstream starting pressure of $p = 1380 \  \unit{\kilo\pascal}$, calculate the upstream starting temperature for which the air temperature in the test section is equal to the liquefaction temperature at $ t = 50 \ \unit{\milli\second}$.
 			\addcontentsline{toc}{subsection}{(e)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
@@ -649,7 +653,8 @@
 			\addcontentsline{toc}{subsubsection}{Solution}
 			sdf
 		\end{enumerate}
-			\item 			
+			\item A wind tunnel is used to simulate a flight vehicle flying through stagnant air. The
+			difference is clearly the reference frame. If a hypersonic boost-glide vehicle is flying at Mach-6 at an altitude of 40 km where the air temperature is $\approx$ 250 K, do you think the air liquefies as it travels over the vehicle? Explain your reasoning.
 			\addcontentsline{toc}{subsection}{(f)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
