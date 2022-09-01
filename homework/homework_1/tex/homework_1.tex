@@ -1,0 +1,685 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{bookmark}
+\usepackage{listing}
+%\usepackage{appendix}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{svg}
+\usepackage{longtable}
+\usepackage[title,titletoc]{appendix}
+\usepackage[UKenglish]{isodate}
+\usepackage{derivative}
+\usepackage{physics}
+\usepackage{cancel}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\cleanlookdateon% Remove ordinal day reference
+\lstset{style=mystyle}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\pagestyle{fancyplain}
+\headheight 35pt
+\rhead{\theauthor\\\today}               
+\chead{\textbf{\Large Homework \homeworknumber{}}}
+\lhead{\coursenumber \\ \coursename{}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+\renewcommand{\headrulewidth}{2pt}
+
+% Edit these as appropriate
+\author{Evan Burke}
+\newcommand\homeworknumber{1} 
+\title{Homework \homeworknumber}
+\newcommand\coursenumber{AEE 553}
+\newcommand\coursename{Compressible Flow}
+\newcommand\instructor{Dr. Carson Running}
+\newcommand\studentID{101318838}   
+     
+%\newcommand\Name{\author}                
+
+\begin{document}
+	\input{title/title.tex}
+	
+	\tableofcontents
+	
+	%    \maketitle
+	
+	%\thispagestyle{empty}
+	\newpage
+	
+	\section*{Nomenclature}
+	
+	{\renewcommand\arraystretch{1.0}
+		\noindent\begin{longtable}{@{}l @{\quad=\quad} l@{}}
+			$A$  & amplitude of oscillation \\
+			$a$ &    cylinder diameter \\
+			$C_p$& pressure coefficient \\
+			$Cx$ & force coefficient in the \textit{x} direction \\
+			$Cy$ & force coefficient in the \textit{y} direction \\
+			c   & chord \\
+			d$t$ & time step \\
+			$Fx$ & $X$ component of the resultant pressure force acting on the vehicle \\
+			$Fy$ & $Y$ component of the resultant pressure force acting on the vehicle \\
+			$f, g$   & generic functions \\
+			$h$  & height \\
+			$i$  & time index during navigation \\
+			$j$  & waypoint index \\
+			$K$  & trailing-edge (TE) nondimensional angular deflection rate
+	\end{longtable}}
+	
+	\addcontentsline{toc}{section}{Nomenclature}
+	\newpage
+	
+	\section*{Problem 1}
+	In an inviscid flow, a small change in pressure d$p$, is related to a small change in velocity, d$u$, by
+
+	\begin{equation*}
+		\dd p = - \rho u\dd u\,,
+	\end{equation*}
+	
+	which is referred to as Euler’s equation and is derived from the conservation of momentum.
+	\addcontentsline{toc}{section}{Problem 1}
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item Using this relation, derive a differential relation for the fractional density change $\dd \rho / \rho$ as a function of the fractional change in velocity $\dd u/ u$, with the fluid's compressibility $\tau$ as a coefficient.
+		\addcontentsline{toc}{subsection}{(a)}
+		
+		\medskip
+		
+		\begin{enumerate}[label=\arabic*.]
+			
+			\item{\textbf{Givens}} \\
+				\addcontentsline{toc}{subsubsection}{Givens}
+				Euler's Equation\\
+				$\dd \rho / \rho $ \\
+				$\dd u / u$ \\
+				$\tau = \frac{1}{\rho} \frac{\dd \rho}{\dd p}$
+			
+			\item{\textbf{Assumptions}} \\
+				\addcontentsline{toc}{subsubsection}{Assumptions}
+				Inviscid flow, small changes in pressure and velocity.\\
+			
+			
+			\item{\textbf{Solution}} \\
+				\addcontentsline{toc}{subsubsection}{Solution}
+				Given the definition of compressibility,
+			
+			
+			\begin{equation*}
+				\tau = \frac{1}{\rho} \frac{\dd \rho}{\dd p} \,,
+			\end{equation*}
+			
+			we can solve algebraically for an expression defining $\dd p$ in terms of $\tau$ and the fractional change in density, $\dd \rho / \rho$:
+			
+			\begin{equation*}
+				\dd p = \frac{1}{\tau} \frac{\dd \rho}{\rho}
+			\end{equation*}
+		
+			Setting the LHS of this new equation equal to the RHS of Euler's equation and solving for $\dd \rho / \rho$:
+			
+			\begin{equation*}
+				\frac{1}{\tau} \frac{\dd \rho}{\rho} = - \rho u\dd u\
+			\end{equation*}
+			
+			
+			
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \rho \tau u \dd u
+			\end{equation*}
+			
+			Finally, we can express this equation in terms of the fractional change in velocity, $\dd u / u$, by multiplying the RHS by $u / u$:
+			
+			\begin{equation*}
+					\boxed{\frac{\dd \rho}{\rho} = - \rho \tau u^2 \frac{\dd u}{u}}
+			\end{equation*} 
+		\end{enumerate}
+		
+		\item Show that $\tau$ for isentropic flows simplifies to
+		\addcontentsline{toc}{subsection}{(b)}
+		
+			\begin{equation*}
+				\tau = \frac{1}{\gamma p} \,.
+			\end{equation*}
+	
+			\begin{enumerate}[label=\arabic*.]
+	
+				\item{\textbf{Givens}} \\
+					\addcontentsline{toc}{subsubsection}{Givens}
+					\begin{equation*}
+						\tau = \frac{1}{\rho} \frac{\dd \rho}{\dd p}
+					\end{equation*}
+				
+				\item{\textbf{Assumptions}} \\
+					\addcontentsline{toc}{subsubsection}{Assumptions}
+					Isentropic flow (therefore, adiabatic and reversible). Thermally perfect gas (TPG).
+					
+				\item{\textbf{Solution}} \\
+					\addcontentsline{toc}{subsubsection}{Solution}		
+					The 1\textsuperscript{st} law of thermodynamics indicates that for a closed system containing a constant mass the specific internal energy can be defined as
+					
+					\begin{equation*}
+						\dd e = \delta q + \delta w\,,
+					\end{equation*}
+
+					where $\delta q$ and $\delta w$ are the amount of heat entering the system and work being done on the system, respectively. To be considered isentropic, a system must be both adiabatic and reversible.\\
+					\medskip
+					\\
+					An adiabatic system is one where there is no heat transfer in or out of the system. Represented mathematically, the first law for an adiabatic system can be written as:
+
+					\begin{equation*}
+						\dd e = \delta w.
+					\end{equation*}
+					
+					A reversible system is one where there are no dissipative phenomena present in the system (shear forces, mass diffusion, etc.). Represented mathematically, the first law for a reversible system can be written as:
+					
+					\begin{equation*}
+						\dd e = \delta q - p\dd \nu\,,
+					\end{equation*}			
+						
+					where $-p\dd \nu$ represents reversible flow work. \\
+					
+					The 1\textsuperscript{st} law for isentropic process, by definition both adiabatic and reversible, can be expressed as:
+					\begin{equation*}
+						\dd e = -p\dd \nu
+					\end{equation*}
+					\medskip
+					\\
+					
+					The 2\textsuperscript{nd} law of thermodynamics tells us the direction that a process will occur. To discuss the 2\textsuperscript{nd} law, we evaluate the change in specific entropy,
+					
+					\begin{equation*}
+						\dd s = \frac{\delta q}{T} + \delta s_{irreversible}\,,
+					\end{equation*}
+				
+					
+					where $\delta s_{irreversible}$ represents lost or unrecoverable energy and is always $\ge$ 0. Combining this definition of specific entropy with our 1\textsuperscript{st} law representations of adiabatic processes, we obtain the following:
+					
+					\begin{equation*}
+						\dd s = \dd s_{irreversible}
+					\end{equation*}
+					
+					\begin{equation*}
+						\dd s \ge 0
+					\end{equation*}
+					
+					For a reversible process, $\delta s_{irreversible}$ must, by definition, equal 0. Therefore, combining the 1\textsuperscript{st} and 2\textsuperscript{nd} law produces the following:
+					
+					\begin{equation*}
+						\dd s = \frac{\delta q}{T}
+					\end{equation*}
+					
+					We have now defined both adiabatic and reversible processes according to the 1\textsuperscript{st} and 2\textsuperscript{nd} laws of thermodynamics. We can now revisit the definition of entropy and evaluate the implications of a system being both adiabatic and reversible.
+					
+					\begin{equation*}
+						\dd s = \delta q + \delta s_{irreversible}
+					\end{equation*}
+				
+					\begin{equation*}
+						\dd s = \cancelto{0, \mathrm{adiabatic}}{\delta q} + \cancelto{0, \mathrm{reversible}}{\delta s_{irreversible}}				
+					\end{equation*}
+					
+					\begin{equation*}
+						\boxed{\dd s = 0}
+					\end{equation*}
+				
+					A system that is both adiabatic and reversible must also be isentropic. With this understanding, the definition of compressibility, $\tau$, can be revisited.
+				
+					\begin{equation*}
+						\tau = \frac{1}{\rho}\frac{\dd \rho}{\dd p} = - \frac{1}{\nu}\frac{\dd\nu}{\dd p}
+					\end{equation*}
+				
+					Recall the isentropic 1\textsuperscript{st} law representation of the change in specific internal energy, $\dd e$:
+					
+					\begin{equation*}
+						\dd e = - p \dd \nu
+					\end{equation*}
+				
+					Assuming the working fluid to be a thermally perfect gas, this can be expressed as:
+					
+					\begin{equation*}
+						c_\nu \dd T= -p \dd \nu
+					\end{equation*}
+					
+					\begin{equation*}
+						\boxed{\dd \nu = - \frac{c_{\nu}\dd T}{p}}
+					\end{equation*}				
+				
+					Now, recall the definition of enthalpy:
+					
+					\begin{equation*}
+						h = e + p\nu
+					\end{equation*}
+					
+					Taking the exact differential leads to:
+					
+					\begin{equation*}
+						\dd h = \dd e + p\dd \nu + \nu \dd p
+					\end{equation*}
+					
+					Replacing $\dd e$ with its isentropic 1\textsuperscript{st} law representation:
+						
+					\begin{equation*}
+						\dd h = -p\dd \nu + p\dd\nu + \nu \dd p
+					\end{equation*}
+					\begin{equation*}
+						\dd h = \nu \dd p
+					\end{equation*}
+				
+					Assuming the working fluid to be a thermally perfect gas, $\dd h$ can be expressed as:
+					
+					\begin{equation*}
+						\dd h = c_p \dd T
+					\end{equation*}
+					
+					Therefore:
+					
+					\begin{equation*}
+						\boxed{\nu \dd p = c_p \dd T}
+					\end{equation*}
+				
+				
+					Plugging the boxed expressions back in to our original expression for $\tau$: 
+					
+					\begin{equation*}
+						\tau = - \frac{1}{\left(c_{p}\dd T\right)} \left(-\frac{c_{\nu}\dd T}{p}\right)
+					\end{equation*}
+					\begin{equation*}
+						\tau = \frac{c_{\nu}}{c_p}\frac{1}{p}
+					\end{equation*}
+					The ratio of specific heats, $\gamma$, is defined as
+					\begin{equation*}
+						\gamma = \frac{c_p}{c_{\nu}}\,,
+					\end{equation*}
+					and can be substituted into the previous equation to arrive at the final result:
+					\begin{equation*}
+						\boxed{\tau = \frac{1}{\gamma p}}
+					\end{equation*}
+			\end{enumerate}
+
+		\item The velocity at a point in an isentropic flow of air is u = 63 m/s traveling by a Cessna
+		172 prop aircraft. The density and pressure are 1.23 kg/m\textsuperscript{3} and 1.01 $\times$ 10\textsuperscript{5} Pa, respectively.
+		If the fractional velocity change is 0.01, what is the fractional density change? Do not look
+		up a value for $\tau_{air}$. Instead, use your result from part (b). $\gamma$ = 1.4 for air.
+		\addcontentsline{toc}{subsection}{(c)}
+		
+		\begin{enumerate}[label=\arabic*.]
+			
+			\item{\textbf{Givens}} \\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			$u = 63 \ \mathrm{m/s}$\\
+			$\rho = 1.23 \ \mathrm{kg/m\textsuperscript{3}}$\\
+			$p = 1.01 \times 10^5 \  \mathrm{Pa}$\\
+			$\frac{\dd u}{u} = 0.01$\\
+			$\gamma_{air} = 1.4$\\		
+			
+			\item{\textbf{Assumptions}} \\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			Isentropic flow, $\tau_{air} = \frac{1}{\gamma p}$.
+			
+			\item{\textbf{Solution}} \\
+			\addcontentsline{toc}{subsubsection}{Solution}		
+			
+			From part (a), the fractional density change can be expressed as:
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \rho \tau u^2 \frac{\dd u}{u}
+			\end{equation*}
+		
+			Using the result from part (b), we can express the fractional density change in terms of $\gamma$ and $p$:
+			
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \rho \left( \frac{1}{\gamma p} \right) u^2 \frac{\dd u}{u}
+			\end{equation*}
+			
+			From the problem statement, we now have all of the givens required to solve for $\dd \rho / \rho$:
+			
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \left(1.23\left[\frac{kg}{m^3}\right]\right) \left(\frac{1}{1.4}\right)\left(\frac{1}{1.01 \times 10^5}\left[\frac{N}{m^2}\right]^{-1} \right) \left(63 \left[\frac{m}{s}\right]\right)^2 \left(0.01\right)
+			\end{equation*}
+
+			Performing dimensional analysis to confirm validity of equation:
+			
+			\begin{equation*}
+				\left[\frac{kg}{m^3}\right] \times \left[\frac{m^2}{N}\right] \times \left[\frac{m^2}{s^2}\right] \rightarrowtail \left[\frac{kg \cdot m}{s^2}\right] \times \left[\frac{1}{N}\right] \rightarrowtail \cancelto{1}{\left[\frac{N}{N}\right]} \checkmark
+			\end{equation*}
+
+			\begin{equation*}
+				\boxed{\frac{\dd \rho}{\rho} = -0.03\%}
+			\end{equation*}
+			
+		\end{enumerate}
+
+		\item Repeat part (c) for a local velocity $u$ = 980 m/s, representative of an SR-71 Blackbird. Allow the fractional velocity change to still be 0.01. You may still assume isentropic flow. 
+		\addcontentsline{toc}{subsection}{(d)}
+		
+		\begin{enumerate}[label=\arabic*.]
+			
+			\item{\textbf{Givens}} \\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			$u = 980 \ \textrm{m/s}$\\
+			$\rho = 1.23 \ \mathrm{kg/m\textsuperscript{3}}$\\
+			$p = 1.01 \times 10^5 \  \mathrm{Pa}$\\
+			$\frac{\dd u}{u} = 0.01$\\
+			$\gamma_{air} = 1.4$\\
+			
+			\item{\textbf{Assumptions}} \\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			Isentropic flow, $\tau_{air} = \frac{1}{\gamma p}$.
+			
+			\item{\textbf{Solution}} \\
+			\addcontentsline{toc}{subsubsection}{Solution}		
+			From part (a), the fractional density change can be expressed as:
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \rho \tau u^2 \frac{\dd u}{u}
+			\end{equation*}
+			
+			Using the result from part (b), we can express the fractional density change in terms of $\gamma$ and $p$:
+			
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \rho \left( \frac{1}{\gamma p} \right) u^2 \frac{\dd u}{u}
+			\end{equation*}
+			
+			From the problem statement, we now have all of the givens required to solve for $\dd \rho / \rho$:
+			
+			\begin{equation*}
+				\frac{\dd \rho}{\rho} = - \left(1.23\left[\frac{kg}{m^3}\right]\right) \left(\frac{1}{1.4}\right)\left(\frac{1}{1.01 \times 10^5}\left[\frac{N}{m^2}\right]^{-1} \right) \left(980 \left[\frac{m}{s}\right]\right)^2 \left(0.01\right)
+			\end{equation*}
+			
+			Performing dimensional analysis to confirm validity of equation:
+			
+			\begin{equation*}
+				\left[\frac{kg}{m^3}\right] \times \left[\frac{m^2}{N}\right] \times \left[\frac{m^2}{s^2}\right] \rightarrowtail \left[\frac{kg \cdot m}{s^2}\right] \times \left[\frac{1}{N}\right] \rightarrowtail \cancelto{1}{\left[\frac{N}{N}\right]} \checkmark
+			\end{equation*}
+			
+			\begin{equation*}
+				\boxed{\frac{\dd \rho}{\rho} = -8.35\%}
+			\end{equation*}
+		\end{enumerate}	
+	
+		\item Comment on the order-of-magnitude differences in the fractional density change between parts (c) and (d). What causes this large difference? Are both compressible flows?
+		\addcontentsline{toc}{subsection}{(e)}
+		
+		\begin{enumerate}[label=\arabic*.]
+			
+			\item{\textbf{Discussion}} \\
+			\addcontentsline{toc}{subsubsection}{Discussion}
+			The fractional density change in part (d) is $\sim$ 242 times larger than the fractional density change in part (c). Given that all other initial conditions and assumptions are identical, the primary driver of the observed difference in magnitude is the flow velocity. Despite the same fractional velocity change, the freestream velocity magnitude is the dominant factor due to the $u^2$ term in our expression for fractional density change. Taking the ratio of velocity squared $u_{d}^2/u_{c}^2$ results in the same $\sim$ 242 ratio observed when comparing fractional density changes. \\The conditions illustrated in part (c) are generally not considered to be compressible due to the extremely low fractional density change. With a rule of thumb of 5\% density change as the boundary between compressible and incompressible, the density change in part (c) is too small by far to be considered compressible. In comparison, the conditions illustrated in part (d) are easily considered compressible due to the much larger density change. The air in both cases tends to become \textit{less} dense, as illustrated by the polarity of $\dd \rho/\rho$, which is caused (generally speaking) by the increase in flow velocity the fluid experiences. 
+		\end{enumerate}
+	
+		\item Use this finding to explain to a classmate why high-speed (i.e., supersonic, hypersonic) flows are inherently compressible.
+		\addcontentsline{toc}{subsection}{(f)}
+		
+		\begin{enumerate}[label=\arabic*.]
+
+			\item{\textbf{Discussion}} \\
+			\addcontentsline{toc}{subsubsection}{Discussion}	
+			High speed flows are inherently compressible due to the magnitude of their freestream flow velocity. Relatively small changes in fractional velocity can result in significant density changes, as illustrated in parts (d) and (e). Larger changes in flow velocity as would be seen in a real-world application of an aerodynamic body in high speed flow would cause even more significant density changes than shown in part (d). As flow velocities grow larger, towards hypersonic conditions, the effect of the $u^2$ term in the fractional density change equation exerts more and more influence. Despite making relatively few assumptions about the flow (isentropic, TPG), we have arrived at a fairly simple model that demonstrates the reality of compressible flow and its sensitivity to small changes in initial conditions.
+		\end{enumerate}
+		
+		
+	\end{enumerate}
+
+
+	\newpage
+	
+	\section*{Problem 2}
+	\addcontentsline{toc}{section}{Problem 2}
+	\begin{enumerate}[label=(\alph*)]
+		\item Derive the following equations for $c_p$ and $c_{\nu}$ (recall, $\gamma = c_p/c_{\nu}$).
+		\addcontentsline{toc}{subsection}{(a)}
+		\begin{equation*}
+			c_p = \frac{\gamma R}{\gamma - 1}
+		\end{equation*}
+		\begin{equation*}
+			c_{\nu} = \frac{R}{\gamma-1}
+		\end{equation*}
+		
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}
+			\addcontentsline{toc}{subsubsection}{Givens}\\
+			$\gamma = \frac{c_p}{c_{\nu}}$
+
+			\item{\textbf{Assumptions}}
+			\addcontentsline{toc}{subsubsection}{Assumptions}\\
+			Assume ideal gas, thermally perfect gas (TPG).
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			The specific heat at constant pressure, $c_p$, is defined as:
+			\begin{equation*}
+				c_p = \left(\frac{\partial h}{\partial T}\right)_p
+			\end{equation*}
+			The specific heat at constant volume, $c_{\nu}$ is defined as:
+			\begin{equation*}
+				c_{\nu} = \left(\frac{\partial e}{\partial T}\right)_{\nu}
+			\end{equation*}		
+			For a thermally perfect gas, (TPG) these can be expressed as:
+			\begin{equation*}
+				c_p = \frac{\dd h}{\dd T}
+			\end{equation*}	
+			\begin{equation*}
+				c_{\nu} = \frac{\dd e}{\dd T}
+			\end{equation*}	
+			Specific enthalpy, $h$, is defined as:
+			\begin{equation*}
+				h = e + p\nu
+			\end{equation*}
+			For an ideal gas, $h$ can be expressed as a function of $T$ and $\nu$:
+			\begin{equation*}
+				h(T,\nu) = e(T,\nu) + p\nu
+			\end{equation*}
+			For a TPG, intermolecular forces are ignored, and $h$ can be expressed as a function of $T$ only:
+			\begin{equation*}
+				h(T) = e(T) + p\nu
+			\end{equation*}
+			Taking the exact differential:
+			\begin{equation*}
+				dh = de + \dd (\frac{p}{\rho})
+			\end{equation*}
+			Substituting using the ideal gas law:
+			\begin{equation*}
+				\frac{p}{\rho} = RT
+			\end{equation*}
+			\begin{equation*}
+				dh = de + R\dd T
+			\end{equation*}
+			Dividing through by $\dd T$:
+			\begin{equation*}
+				\left(\frac{\dd h}{\dd T}\right) = \left(\frac{\dd e}{\dd T}\right) + R
+			\end{equation*}
+			Recognizing that enthalpy and energy terms are in the forms of the previously defined specific heats and substituting gives us another useful equation:
+			\begin{equation*}
+				c_p = c_{\nu} + R
+			\end{equation*}
+			\begin{equation*}
+				\boxed{c_p - c_{\nu} = R}
+			\end{equation*}
+		
+			Dividing through by $c_p$:
+			\begin{equation*}
+				\frac{c_p}{c_p} - \frac{c_{\nu}}{c_p} = \frac{R}{c_p}
+			\end{equation*}
+			\begin{equation*}
+				1 - \frac{c_{\nu}}{c_p} = \frac{R}{c_p}
+			\end{equation*}
+			Rearranging to solve for $c_p$:
+			\begin{equation*}
+				c_p = \frac{R}{1-\frac{c_{\nu}}{c_p}}
+			\end{equation*}
+			Substituting $\gamma$ into the equation and rearranging:
+			\begin{equation*}
+				c_p = \frac{R}{1-\frac{1}{\gamma}}
+			\end{equation*}
+			\begin{equation*}
+				c_p = \frac{R}{\frac{\gamma-1}{\gamma}}
+			\end{equation*}
+			\begin{equation*}
+				\boxed{c_p = \frac{\gamma R}{\gamma-1}}
+			\end{equation*}
+			Recall the relationship between specific heats first derived:
+			\begin{equation*}
+				c_p - c_{\nu} = R
+			\end{equation*}
+			Dividing through by $c_{\nu}$:
+			\begin{equation*}
+				\frac{c_p}{c_{\nu}} - \frac{c_{\nu}}{c_\nu} = \frac{R}{c_\nu}
+			\end{equation*}
+			Simplify and rearrange:
+			\begin{equation*}
+				\gamma - 1 = \frac{R}{c_\nu}
+			\end{equation*}
+			Solve for $c_\nu$:
+			\begin{equation*}
+				\boxed{c_\nu = \frac{R}{\gamma -1}}
+			\end{equation*}
+		\end{enumerate}
+		
+		\item For what assumptions are these equations valid?
+		\addcontentsline{toc}{subsection}{(b)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Discussion}}\\
+			\addcontentsline{toc}{subsubsection}{Discussion}
+			These equations are valid when TPG is assumed, and therefore also hold for calorically perfect gases (CPG). The ideal gas assumption alone does not fulfill the requirements for these equations to be valid because specific heats can vary with other parameters beside temperature. Making the TPG assumption implies that specific heats only vary with temperature, allowing for substitution into the enthalpy equation. Because a CPG is a specific subset of a TPG, the equations are also valid for those cases.
+		\end{enumerate}
+	\end{enumerate}
+	\newpage
+	
+	\section*{Problem 3}
+	\addcontentsline{toc}{section}{Problem 3}
+	\begin{enumerate}[label=(\alph*)]
+		\item 
+		\begin{enumerate}[label=\arabic*.]
+		\addcontentsline{toc}{subsection}{(a)}
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+		\item 
+		\addcontentsline{toc}{subsection}{(b)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+			\item 
+			\addcontentsline{toc}{subsection}{(c)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+			\item 
+			\addcontentsline{toc}{subsection}{(d)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+			\item 
+			\addcontentsline{toc}{subsection}{(e)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+			\item 			
+			\addcontentsline{toc}{subsection}{(f)}
+		\begin{enumerate}[label=\arabic*.]
+			\item{\textbf{Givens}}\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+			sdf
+			\item{\textbf{Assumptions}}\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+			sdf
+			\item{\textbf{Solution}}\\
+			\addcontentsline{toc}{subsubsection}{Solution}
+			sdf
+		\end{enumerate}
+	\end{enumerate}
+
+	\newpage
+	
+	\begin{appendices}
+		\section{Problem 1 Python Code}
+		\lstinputlisting[language=Python]{../python/homework_1.py}
+		
+		\newpage
+
+		\section{Problem 3 Python Code}
+		\newpage
+	\end{appendices}
+	
+	
+	%\newpage
+	%\appendix
+	%\section{Python Code}
+	%\lstinputlisting[language=Python]{Module1.py}
+	
+\end{document}
