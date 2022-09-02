@@ -34,7 +34,7 @@
 \contentsline {subsubsection}{Givens}{14}{Item.30}%
 \contentsline {subsubsection}{Assumptions}{14}{Item.31}%
 \contentsline {subsubsection}{Solution}{14}{Item.32}%
-\contentsline {subsection}{(c)}{14}{Item.33}%
+\contentsline {subsection}{(c)}{15}{Item.33}%
 \contentsline {subsubsection}{Givens}{15}{Item.34}%
 \contentsline {subsubsection}{Assumptions}{15}{Item.35}%
 \contentsline {subsubsection}{Solution}{15}{Item.36}%
@@ -46,7 +46,7 @@
 \contentsline {subsubsection}{Givens}{15}{Item.42}%
 \contentsline {subsubsection}{Assumptions}{15}{Item.43}%
 \contentsline {subsubsection}{Solution}{15}{Item.44}%
-\contentsline {subsection}{(f)}{15}{Item.45}%
+\contentsline {subsection}{(f)}{16}{Item.45}%
 \contentsline {subsubsection}{Givens}{16}{Item.46}%
 \contentsline {subsubsection}{Assumptions}{16}{Item.47}%
 \contentsline {subsubsection}{Solution}{16}{Item.48}%
