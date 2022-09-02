@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import pandas
 
 rho = 1.23
 p = 1.01e5
@@ -17,3 +18,6 @@ print(f'The fractional density change is {round(drho_rho_d*100,3)} %')
 
 magnitude = drho_rho_d/drho_rho_c
 print(f'The fractional density change in part (d) is {round(magnitude,0)} times that of part (c)')
+
+# Problem 3b
+data = pandas.read_excel('../HW_1_Data.xlsx')
