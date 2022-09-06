@@ -53,8 +53,6 @@ pressures = pressures.values.tolist()
 densities = [(pressure/isentropic_constant)**(1/gamma) for pressure in pressures]
 temperatures = [pressure/(density*R_air) for pressure,density in zip(pressures,densities)]
 
-# TODO: Update time for plots
-'''
 fig, ax = plt.subplots()
 ax.plot(times,pressures,'.')
 ax.set_xlabel('Time [ms]')
@@ -78,7 +76,7 @@ ax.set_ylabel('Temperature [K]')
 plt.title('AFRL Ludwieg Tube\nTemperature vs. Time')
 plt.savefig('../images/temperature_vs_time.png')
 plt.close()
-'''
+
 
 # Problem 3c
 useful_pressures = [pressures[idx] for idx,time in enumerate(times) if (time >= 25) and (time <=75)]
@@ -98,7 +96,6 @@ T_1 = T_init
 p_1 = p_init
 closest_time = min(times, key=lambda x:abs(x-50))
 idx_50 = [idx for idx,time in enumerate(times) if time == closest_time]
-#print(idx_50)
 T_2 = temperatures[idx_50[0]]
 p_2 = pressures[idx_50[0]]
 rho_2 = densities[idx_50[0]]
@@ -116,5 +113,5 @@ print(f'Change in entropy = {round(ds_50,2)} J/kg K\n')
 print('Problem 3e:')
 T_liq = 77 # http://www.edubilla.com/invention/liquefaction-of-air/
 T_upstream = T_liq/(p_2/p_1)**((gamma-1)/gamma)
-print(f'The upstream temperature required for the test-section pressure at t = 50 ms is {round(T_upstream,2)} K')
+print(f'The upstream temperature required to cause liquefaction temperature at t = 50 ms is {round(T_upstream,2)} K')
 

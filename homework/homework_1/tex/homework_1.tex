@@ -28,6 +28,13 @@
 \usepackage{physics}
 \usepackage{cancel}
 \usepackage{empheq}
+\usepackage{draftwatermark}
+
+\SetWatermarkAngle{45}
+\SetWatermarkScale{1.75}
+\SetWatermarkColor{red!15}
+\SetWatermarkFontSize{42pt}
+\SetWatermarkText{\shortstack{\bfseries\sffamily DRAFT! \\ [1em] \bfseries\sffamily DRAFT! \\ [1em ]\bfseries\sffamily DRAFT! }}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -124,6 +131,7 @@
 	\addcontentsline{toc}{section}{Problem 1}
 	
 	\begin{enumerate}[label=(\alph*)]
+		\label{Sec:Problem1}
 		\item Using this relation, derive a differential relation for the fractional density change $\dd \rho / \rho$ as a function of the fractional change in velocity $\dd u/ u$, with the fluid's compressibility $\tau$ as a coefficient.
 		\addcontentsline{toc}{subsection}{(a)}
 		
@@ -132,19 +140,18 @@
 		\begin{enumerate}[label=\arabic*.]
 			
 			\item{\textbf{Givens}} \\
-				\addcontentsline{toc}{subsubsection}{Givens}
 				Euler's Equation\\
 				$\dd \rho / \rho $ \\
 				$\dd u / u$ \\
 				$\tau = \frac{1}{\rho} \frac{\dd \rho}{\dd p}$
-			
+				\addcontentsline{toc}{subsubsection}{Givens}
+
 			\item{\textbf{Assumptions}} \\
-				\addcontentsline{toc}{subsubsection}{Assumptions}
-				Inviscid flow, small changes in pressure and velocity.\\
+			Inviscid flow, small changes in pressure and velocity.\\
+			\addcontentsline{toc}{subsubsection}{Assumptions}
 			
 			
 			\item{\textbf{Solution}} \\
-				\addcontentsline{toc}{subsubsection}{Solution}
 				Given the definition of compressibility,
 			
 			
@@ -175,6 +182,8 @@
 			\begin{equation*}
 					\boxed{\frac{\dd \rho}{\rho} = - \rho \tau u^2 \frac{\dd u}{u}}
 			\end{equation*} 
+			\addcontentsline{toc}{subsubsection}{Solution}
+
 		\end{enumerate}
 		
 		\item Show that $\tau$ for isentropic flows simplifies to
@@ -187,17 +196,18 @@
 			\begin{enumerate}[label=\arabic*.]
 	
 				\item{\textbf{Givens}} \\
-					\addcontentsline{toc}{subsubsection}{Givens}
 					\begin{equation*}
 						\tau = \frac{1}{\rho} \frac{\dd \rho}{\dd p}
 					\end{equation*}
-				
+					\addcontentsline{toc}{subsubsection}{Givens}
+
+
 				\item{\textbf{Assumptions}} \\
-					\addcontentsline{toc}{subsubsection}{Assumptions}
 					Isentropic flow (therefore, adiabatic and reversible). Thermally perfect gas (TPG).
-					
+					\addcontentsline{toc}{subsubsection}{Assumptions}
+
+
 				\item{\textbf{Solution}} \\
-					\addcontentsline{toc}{subsubsection}{Solution}		
 					The 1\textsuperscript{st} law of thermodynamics indicates that for a closed system containing a constant mass the specific internal energy can be defined as
 					
 					\begin{equation*}
@@ -235,7 +245,7 @@
 					\end{equation*}
 				
 					
-					where $\delta s_{irreversible}$ represents lost or unrecoverable energy and is always $\ge$ 0. Combining this definition of specific entropy with our 1\textsuperscript{st} law representations of adiabatic processes, we obtain the following:
+					where $\delta s_{irreversible}$ represents lost or unrecoverable energy and is always $\ge$ 0. Combining this definition of specific entropy with our 1\textsuperscript{st} law representations of adiabatic processes, we obtain the following for adiabatic processes:
 					
 					\begin{equation*}
 						\dd s = \dd s_{irreversible}
@@ -337,6 +347,8 @@
 					\begin{equation*}
 						\boxed{\tau = \frac{1}{\gamma p}}
 					\end{equation*}
+					\addcontentsline{toc}{subsubsection}{Solution}		
+
 			\end{enumerate}
 
 		\item The velocity at a point in an isentropic flow of air is u = 63 m/s traveling by a Cessna
@@ -348,19 +360,20 @@
 		\begin{enumerate}[label=\arabic*.]
 			
 			\item{\textbf{Givens}} \\
-			\addcontentsline{toc}{subsubsection}{Givens}
 			$u = 63 \ \mathrm{m/s}$\\
 			$\rho = 1.23 \ \mathrm{kg/m\textsuperscript{3}}$\\
 			$p = 1.01 \times 10^5 \  \mathrm{Pa}$\\
 			$\frac{\dd u}{u} = 0.01$\\
 			$\gamma_{air} = 1.4$\\		
-			
+			\addcontentsline{toc}{subsubsection}{Givens}
+
+
 			\item{\textbf{Assumptions}} \\
-			\addcontentsline{toc}{subsubsection}{Assumptions}
 			Isentropic flow, $\tau_{air} = \frac{1}{\gamma p}$.
-			
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+
+
 			\item{\textbf{Solution}} \\
-			\addcontentsline{toc}{subsubsection}{Solution}		
 			
 			From part (a), the fractional density change can be expressed as:
 			\begin{equation*}
@@ -389,6 +402,10 @@
 				\boxed{\frac{\dd \rho}{\rho} = -0.03\%}
 			\end{equation*}
 			
+			All calculations were performed in Python, see Appendix \ref{Problem1Python} for relevant code. 
+
+			\addcontentsline{toc}{subsubsection}{Solution}		
+
 		\end{enumerate}
 
 		\item Repeat part (c) for a local velocity $u$ = 980 m/s, representative of an SR-71 Blackbird. Allow the fractional velocity change to still be 0.01. You may still assume isentropic flow. 
@@ -397,19 +414,20 @@
 		\begin{enumerate}[label=\arabic*.]
 			
 			\item{\textbf{Givens}} \\
-			\addcontentsline{toc}{subsubsection}{Givens}
 			$u = 980 \ \textrm{m/s}$\\
 			$\rho = 1.23 \ \mathrm{kg/m\textsuperscript{3}}$\\
 			$p = 1.01 \times 10^5 \  \mathrm{Pa}$\\
 			$\frac{\dd u}{u} = 0.01$\\
 			$\gamma_{air} = 1.4$\\
+			\addcontentsline{toc}{subsubsection}{Givens}
+
 			
 			\item{\textbf{Assumptions}} \\
-			\addcontentsline{toc}{subsubsection}{Assumptions}
 			Isentropic flow, $\tau_{air} = \frac{1}{\gamma p}$.
-			
+			\addcontentsline{toc}{subsubsection}{Assumptions}
+
+
 			\item{\textbf{Solution}} \\
-			\addcontentsline{toc}{subsubsection}{Solution}		
 			From part (a), the fractional density change can be expressed as:
 			\begin{equation*}
 				\frac{\dd \rho}{\rho} = - \rho \tau u^2 \frac{\dd u}{u}
@@ -436,6 +454,12 @@
 			\begin{equation*}
 				\boxed{\frac{\dd \rho}{\rho} = -8.35\%}
 			\end{equation*}
+
+			All calculations were performed in Python, see Appendix \ref{Problem1Python} for relevant code. 
+
+			\addcontentsline{toc}{subsubsection}{Solution}		
+
+
 		\end{enumerate}	
 	
 		\item Comment on the order-of-magnitude differences in the fractional density change between parts (c) and (d). What causes this large difference? Are both compressible flows?
@@ -444,8 +468,8 @@
 		\begin{enumerate}[label=\arabic*.]
 			
 			\item{\textbf{Discussion}} \\
-			\addcontentsline{toc}{subsubsection}{Discussion}
 			The fractional density change in part (d) is $\sim$ 242 times larger than the fractional density change in part (c). Given that all other initial conditions and assumptions are identical, the primary driver of the observed difference in magnitude is the flow velocity. Despite the same fractional velocity change, the freestream velocity magnitude is the dominant factor due to the $u^2$ term in our expression for fractional density change. Taking the ratio of velocity squared $u_{d}^2/u_{c}^2$ results in the same $\sim$ 242 ratio observed when comparing fractional density changes. \\The conditions illustrated in part (c) are generally not considered to be compressible due to the extremely low fractional density change. With a rule of thumb of 5\% density change as the boundary between compressible and incompressible, the density change in part (c) is too small by far to be considered compressible. In comparison, the conditions illustrated in part (d) are easily considered compressible due to the much larger density change. The air in both cases tends to become \textit{less} dense, as illustrated by the polarity of $\dd \rho/\rho$, which is caused (generally speaking) by the increase in flow velocity the fluid experiences. 
+			\addcontentsline{toc}{subsubsection}{Discussion}
 		\end{enumerate}
 	
 		\item Use this finding to explain to a classmate why high-speed (i.e., supersonic, hypersonic) flows are inherently compressible.
@@ -454,8 +478,9 @@
 		\begin{enumerate}[label=\arabic*.]
 
 			\item{\textbf{Discussion}} \\
-			\addcontentsline{toc}{subsubsection}{Discussion}	
 			High speed flows are inherently compressible due to the magnitude of their freestream flow velocity. Relatively small changes in fractional velocity can result in significant density changes, as illustrated in parts (d) and (e). Larger changes in flow velocity as would be seen in a real-world application of an aerodynamic body in high speed flow would cause even more significant density changes than shown in part (d). As flow velocities grow larger, towards hypersonic conditions, the effect of the $u^2$ term in the fractional density change equation exerts more and more influence. Despite making relatively few assumptions about the flow (isentropic, TPG), we have arrived at a fairly simple model that demonstrates the reality of compressible flow and its sensitivity to small changes in initial conditions.
+			\addcontentsline{toc}{subsubsection}{Discussion}	
+
 		\end{enumerate}
 		
 		
@@ -465,6 +490,7 @@
 	\newpage
 	
 	\section*{Problem 2}
+	\label{Sec:Problem2}
 	\addcontentsline{toc}{section}{Problem 2}
 	\begin{enumerate}[label=(\alph*)]
 		\item Derive the following equations for $c_p$ and $c_{\nu}$ (recall, $\gamma = c_p/c_{\nu}$).
@@ -485,7 +511,6 @@
 			\addcontentsline{toc}{subsubsection}{Assumptions}\\
 			Assume ideal gas, thermally perfect gas (TPG).
 			\item{\textbf{Solution}}\\
-			\addcontentsline{toc}{subsubsection}{Solution}
 			The specific heat at constant pressure, $c_p$, is defined as:
 			\begin{equation*}
 				c_p = \left(\frac{\partial h}{\partial T}\right)_p
@@ -573,14 +598,16 @@
 			\begin{equation*}
 				\boxed{c_\nu = \frac{R}{\gamma -1}}
 			\end{equation*}
+			\addcontentsline{toc}{subsubsection}{Solution}
+
 		\end{enumerate}
 		
 		\item For what assumptions are these equations valid?
 		\addcontentsline{toc}{subsection}{(b)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Discussion}}\\
-			\addcontentsline{toc}{subsubsection}{Discussion}
 			These equations are valid when TPG is assumed, and therefore also hold for calorically perfect gases (CPG). The ideal gas assumption alone does not fulfill the requirements for these equations to be valid because specific heats can vary with other parameters beside temperature. Making the TPG assumption implies that specific heats only vary with temperature, allowing for substitution into the enthalpy equation. Because a CPG is a specific subset of a TPG, the equations are also valid for those cases.
+			\addcontentsline{toc}{subsubsection}{Discussion}
 		\end{enumerate}
 	\end{enumerate}
 	\newpage
@@ -603,7 +630,7 @@
 		\addcontentsline{toc}{subsection}{(b)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
-			HW\_1\_Data.xlsx
+			\textit{HW\_1\_Data.xlsx}
 			\addcontentsline{toc}{subsubsection}{Givens}
 			
 			\item{\textbf{Assumptions}}\\
@@ -631,9 +658,11 @@
 			\begin{equation*}
 				T_i = \frac{P_i}{\rho_i R}
 			\end{equation*}
+
 			All calculations for the time histories were performed in Python, see Appendix \ref{Problem3Python} for relevant code. 
 			
 			\addcontentsline{toc}{subsubsection}{Calculations}
+			\newpage	
 			\item{\textbf{Figures}}\\
 			\addcontentsline{toc}{subsubsection}{Figures}
 
@@ -655,7 +684,7 @@
 				\centering
 				\includegraphics[scale=0.7]{density_vs_time}
 				\label{Density_vs_Time}
-				\caption{Density vs Time. in Test Section}
+				\caption{Density vs. Time in Test Section}
 			\end{figure}
 			\vspace{10in}
 			
@@ -671,8 +700,8 @@
 			Using Python's \textit{statistics} module, the mean and standard deviation of the pressure measurements between $25 < t < 75 \ \unit{ms}$ are easily calculated:
 			
 			\begin{empheq}[box=\fbox]{align}
-				\mu_{pressure} &= 729.27 \ \unit{Pa}\\
-				\sigma_{pressure} &= 23.56 \ \unit{Pa}
+				\mu_{pressure} &= 729.27 \ \unit{Pa} \nonumber\\
+				\sigma_{pressure} &= 23.56 \ \unit{Pa} \nonumber
 			\end{empheq}
 
 			\addcontentsline{toc}{subsubsection}{Solution}
@@ -702,7 +731,59 @@
 				T_{50  \unit{ms}} &= 58.74 \ K
 			\end{align*}\
 			
-			Substituting into the given equation:
+			Recalling the discussion of the first and second law for reversible processes highlighted in \nameref{Sec:Problem1}, we begin by expressing the first law for a reversible process in terms of internal energy and enthalpy.   
+			By definition, for internal energy: 
+			\begin{equation*}
+				\dd e = \delta q_{reversible} - p\dd \nu
+			\end{equation*}
+			
+			Expressing the first law in terms of enthalpy:
+
+			\begin{align*}
+				\dd h &= \dd e + p\dd \nu + \nu \dd p\\
+				\dd h &= \delta q_{reversible} - p\dd \nu + p\dd \nu + \nu \dd p\\
+				\dd h &= \delta q_{reversible} + \nu \dd p\\
+			\end{align*}
+
+			Now, we examine the second law for a reversible process:
+
+			\begin{align*}
+				\dd s &= \frac{\delta q_{reversible}}{T}\\
+				\delta q_{reversible} &= T \dd s
+			\end{align*}
+
+			Substituting this equation into the previous relations for $\dd h \textrm{and} \dd e$ yields the following, known as \textit{Gibb's Equations}:
+
+			\begin{empheq}[box=\fbox]{align}
+				T \dd s &= \dd e + p \dd \nu \nonumber \\
+				T \dd s &= \dd h - \nu \dd p \nonumber
+			\end{empheq}
+			
+			\textit{Note: To this point, only reversible assumptions have been made.}\\
+
+			By making the assumption that the working fluid is a TPG, we can substitute specific heat relationships into the above equations, and additionally use the ideal gas equation of state to recast the final term of each equation in terms of a variable and its differential operator.
+			Finally, we divide through by $T$ to isolate $\dd s$.
+
+			\begin{align*}
+				\dd s &= c_\nu \frac{\dd T}{T} + R {\frac{\dd \nu}{\nu}}\\
+				\dd s &= c_p \frac{\dd T}{T} - R {\frac{\dd p}{p}} 
+			\end{align*}
+			
+			We now examine the topmost equation involving $c_\nu$. Dividing through by $\dd T$ and integrating the equation from state $1$ to state $2$ yields an expression for the change in entropy generated between two states of a reversible process of a TPG.
+
+			\begin{align*}
+				\dd s &= c_\nu \frac{\dd T}{T} + R{\frac{\dd \nu}{\nu}}\\
+				\int_1^2 \dd s &= \int_1^2 c_\nu \frac{\dd T}{T} + \int_1^2 R{\frac{\dd \nu}{\nu}}\\
+				s_2 - s_1 &= c_v \ln{\left(\frac{T_2}{T_1}\right)} + R \ln{\left(\frac{\nu_2}{\nu_1}\right)}
+			\end{align*}
+
+			Performing the same integration for the other Gibb's Equation yields the equation given in the problem statement:
+
+			\begin{equation*}
+				s_2 - s_1 = c_p \ln(\frac{T_2}{T_1}) - R \ln(\frac{p_2}{p_1}) \,.
+			\end{equation*}
+
+			Substituting known values into the given equation:
 			\begin{equation*}
 				s_2 - s_1 = 1000 \left[\frac{\unit{\joule}}{\unit{\kilogram}\cdot \unit{\kelvin}}\right] 
 				\ln{\left(\frac{58.74 \ [\unit{\kelvin}]}{500 \ [\unit{\kelvin}]}\right)}
@@ -712,9 +793,14 @@
 			\begin{equation*}
 				\boxed{s_2-s_1 = 9.64 \ \unit{\joule/\kilogram.\kelvin}}
 			\end{equation*}
+			This value of entropy change makes sense even in light of the isentropic assumption made during data analysis. 
+			There is a positive, non-zero entropy change due to the presence of a boundary layer and dissipative effects in the flow. 
+			In addition, transducer error can contribute to inaccuracies in flow measurements. 
+			Despite not being fully isentropic according to this calculation, the change in entropy is very small and indicates that the isentropic assumption is not unreasonable.
 			\addcontentsline{toc}{subsubsection}{Solution}
 			
 		\end{enumerate}
+
 			\item What do the isentropic relations show happens to the temperature of the flow as it expands to Mach-6? Look up the liquefaction temperature of air. What is it in Kelvin? With
 			this knowledge, why do you think the air accelerated through high-speed wind tunnels is
 			heated before every test?\\
@@ -722,15 +808,74 @@
 			\addcontentsline{toc}{subsection}{(e)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
+			$p_{init} = 1380 \ \unit{\kilo\pascal}$
 			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
+			
 			\item{\textbf{Assumptions}}\\
+			$T_{liquefaction} = 77 \ \unit{\kelvin}$\\
+			$P_{50 \unit{\ms}} = 766.99 \ \unit{\pascal}$\\
+			$\gamma = 1.4$
 			\addcontentsline{toc}{subsubsection}{Assumptions}
-			sdf
+			
+			\item{\textbf{Discussion}}\\
+			Isentropic relations indicate that the temperature of a flow \textit{expanding} to Mach 6 will decrease.
+			Recall the relationship between temperature and density at any 2 points in an isentropic flow:
+			\begin{equation*}
+				\frac{T_2}{T_1} = {\left(\frac{\rho_2}{\rho_1}\right)}^{\gamma-1}
+			\end{equation*}
+			As $\rho$ decreases in an accelerating, expanding supersonic flow, $T$ will also drop, albeit not at a one-to-one rate. \\
+			The liquefaction temperature of air is $T_{liquefaction} = 77 \ \unit{\kelvin}$ according to \url{http://www.edubilla.com/invention/liquefaction-of-air/}.
+			With this in mind, it makes sense that heating could be required for the supply air in a high-speed wind tunnel, to avoid accidentally generating condensation or liquid air in the tunnel that could compromise data collection.
+
+			\addcontentsline{toc}{subsubsection}{Discussion}
+
 			\item{\textbf{Solution}}\\
+			Recall the relationship between temperature and pressure at any two points in an isentropic flow:
+
+			\begin{equation*}
+				\frac{T_2}{T_1} = \left({\frac{P_2}{P_1}}\right)^{\frac{\gamma-1}{\gamma}}
+			\end{equation*}
+
+			Setting $T_2$ equal to $T_{liquefaction}$ and rearranging to solve for $T_{upstream}$:
+
+			\begin{equation*}
+				T_{upstream} = \frac{T_{liquefaction}}{\left({\frac{P_2}{P_1}}\right)^{\frac{\gamma-1}{\gamma}}}
+			\end{equation*}
+
+			Substituting in known values and solving:
+
+			\begin{equation*}
+				T_{upstream} = \frac{77 \ \left[\unit{\kelvin}\right]}{\left(\frac{1380000 \ [\unit{\pascal}]}{766.99 \ [\unit{\pascal}]}\right)^{\frac{1.4-1}{1.4}}}
+			\end{equation*}
+			\begin{equation*}
+				\boxed{T_{upstream} = 655.41\  \unit{\kelvin}}
+			\end{equation*}
+			
+			The result of this calculation, along with previously-solved-for temperature at $t = 50 \ \unit{\ms}$ indicates that the air in the test section is \textit{already below the temperature required for liquefaction}.
+			The reason this calculation may still be valid is that the liquefaction temperature of $77 \ \unit{\kelvin}$ is specifically for air under atmospheric pressure. 
+			The pressure in the tunnel test-section at  $t = 50 \ \unit{\ms}$ is substantially less than atmospheric pressure, making liquefaction unlikely under these conditions.
+			To confirm the calculation of temperature for the air in the test section, we can utilize the form of the isentropic equations that relies on total/stagnation conditions.
+			\begin{equation*}
+				\frac{T_0}{T} = 1 + \frac{\gamma-1}{2}M^2
+			\end{equation*}
+			
+			In the equation above, $T_0$ represents the \textit{total temperature} of the flow, or the temperature that the flow would achieve if it were isentropically brought to a halt.
+			Because the upstream conditions are initially stagnant, we can assume that $T_{init} = 500 \ \unit{\kelvin}$ is equivalent to $T_0 = 500 \ \unit{\kelvin}$. 
+			In addition, we assume that the tunnel data taken from the .xlsx spreadsheet corresponds with a Mach 6 condition. 
+			With these assumptions and this equation, a notional static temperature, $T_{static}$, is calculated, representative of an isentropic flow with the given initial conditions expanding to exactly Mach 6.
+			
+			\begin{align*}
+				T_{static} &= \frac{T_0}{1 + \frac{\gamma-1}{2}M^2}\\
+				T_{static} &= \frac{500 \left[\unit{\kelvin}\right]}{1 + \frac{1.4-1}{2}(6)^2}\\
+				T_{static} &= 60.97 \ \unit{\kelvin}
+			\end{align*}
+
+			This result compares well with the calculated temperature from the spreadsheet data, where $T_{50 \unit{\milli\second}} = 58.74 \ \unit{\kelvin}$.
+			Despite initially appearing to be a miscalculation, the temperature calculated from the data is validated by its relative closeness to the exact Mach 6 isentropic temperature for the given initial conditions.
 			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
+			
 		\end{enumerate}
+
 			\item A wind tunnel is used to simulate a flight vehicle flying through stagnant air. The
 			difference is clearly the reference frame. If a hypersonic boost-glide vehicle is flying at Mach-6 at an altitude of 40 km where the air temperature is $\approx$ 250 K, do you think the air liquefies as it travels over the vehicle? Explain your reasoning.
 			\addcontentsline{toc}{subsection}{(f)}
@@ -757,12 +902,13 @@
 	
 	\begin{appendices}
 		\section{Problem 1 Python Code}
+		\label{Problem1Python}
 		\lstinputlisting[language=Python,lastline=27]{../python/homework_1.py}
-		
 		\newpage
 
 		\section{Problem 3 Python Code}
 		\label{Problem3Python}
+
 		\lstinputlisting[language=Python,firstline=28]{../python/homework_1.py}
 		\newpage
 	\end{appendices}

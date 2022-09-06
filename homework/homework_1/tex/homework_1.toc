@@ -3,20 +3,20 @@
 \contentsline {subsection}{(a)}{4}{Item.1}%
 \contentsline {subsubsection}{Givens}{4}{Item.2}%
 \contentsline {subsubsection}{Assumptions}{4}{Item.3}%
-\contentsline {subsubsection}{Solution}{4}{Item.4}%
+\contentsline {subsubsection}{Solution}{5}{Item.4}%
 \contentsline {subsection}{(b)}{5}{Item.5}%
 \contentsline {subsubsection}{Givens}{5}{Item.6}%
 \contentsline {subsubsection}{Assumptions}{5}{Item.7}%
-\contentsline {subsubsection}{Solution}{5}{Item.8}%
+\contentsline {subsubsection}{Solution}{8}{Item.8}%
 \contentsline {subsection}{(c)}{8}{Item.9}%
 \contentsline {subsubsection}{Givens}{8}{Item.10}%
 \contentsline {subsubsection}{Assumptions}{8}{Item.11}%
-\contentsline {subsubsection}{Solution}{8}{Item.12}%
+\contentsline {subsubsection}{Solution}{9}{Item.12}%
 \contentsline {subsection}{(d)}{9}{Item.13}%
 \contentsline {subsubsection}{Givens}{9}{Item.14}%
 \contentsline {subsubsection}{Assumptions}{9}{Item.15}%
-\contentsline {subsubsection}{Solution}{9}{Item.16}%
-\contentsline {subsection}{(e)}{9}{Item.17}%
+\contentsline {subsubsection}{Solution}{10}{Item.16}%
+\contentsline {subsection}{(e)}{10}{Item.17}%
 \contentsline {subsubsection}{Discussion}{10}{Item.18}%
 \contentsline {subsection}{(f)}{10}{Item.19}%
 \contentsline {subsubsection}{Discussion}{10}{Item.20}%
@@ -24,7 +24,7 @@
 \contentsline {subsection}{(a)}{11}{Item.21}%
 \contentsline {subsubsection}{Givens}{11}{Item.22}%
 \contentsline {subsubsection}{Assumptions}{11}{Item.23}%
-\contentsline {subsubsection}{Solution}{11}{Item.24}%
+\contentsline {subsubsection}{Solution}{13}{Item.24}%
 \contentsline {subsection}{(b)}{13}{Item.25}%
 \contentsline {subsubsection}{Discussion}{13}{Item.26}%
 \contentsline {section}{Problem 3}{14}{section*.5}%
@@ -34,19 +34,20 @@
 \contentsline {subsubsection}{Givens}{14}{Item.30}%
 \contentsline {subsubsection}{Assumptions}{14}{Item.31}%
 \contentsline {subsubsection}{Calculations}{15}{Item.32}%
-\contentsline {subsubsection}{Figures}{15}{Item.33}%
+\contentsline {subsubsection}{Figures}{16}{Item.33}%
 \contentsline {subsection}{(c)}{18}{Item.34}%
 \contentsline {subsubsection}{Givens}{18}{Item.35}%
-\contentsline {subsubsection}{Solution}{18}{AMS.6}%
+\contentsline {subsubsection}{Solution}{18}{Item.36}%
 \contentsline {subsection}{(d)}{18}{Item.37}%
 \contentsline {subsubsection}{Givens}{18}{Item.38}%
 \contentsline {subsubsection}{Assumptions}{18}{Item.39}%
-\contentsline {subsubsection}{Solution}{18}{Item.40}%
-\contentsline {subsection}{(e)}{19}{Item.41}%
-\contentsline {subsubsection}{Givens}{19}{Item.42}%
-\contentsline {subsubsection}{Assumptions}{19}{Item.43}%
-\contentsline {subsubsection}{Solution}{19}{Item.44}%
-\contentsline {subsection}{(f)}{19}{Item.45}%
-\contentsline {subsubsection}{Discussion}{19}{Item.46}%
-\contentsline {section}{Appendix \numberline {A}Problem 1 Python Code}{20}{appendix.1.A}%
-\contentsline {section}{Appendix \numberline {B}Problem 3 Python Code}{21}{appendix.1.B}%
+\contentsline {subsubsection}{Solution}{20}{Item.40}%
+\contentsline {subsection}{(e)}{20}{Item.41}%
+\contentsline {subsubsection}{Givens}{20}{Item.42}%
+\contentsline {subsubsection}{Assumptions}{20}{Item.43}%
+\contentsline {subsubsection}{Discussion}{21}{Item.44}%
+\contentsline {subsubsection}{Solution}{22}{Item.45}%
+\contentsline {subsection}{(f)}{22}{Item.46}%
+\contentsline {subsubsection}{Discussion}{22}{Item.47}%
+\contentsline {section}{Appendix \numberline {A}Problem 1 Python Code}{23}{appendix.1.A}%
+\contentsline {section}{Appendix \numberline {B}Problem 3 Python Code}{24}{appendix.1.B}%
