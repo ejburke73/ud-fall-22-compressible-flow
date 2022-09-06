@@ -28,13 +28,15 @@
 \usepackage{physics}
 \usepackage{cancel}
 \usepackage{empheq}
-\usepackage{draftwatermark}
 
+\iffalse
+\usepackage{draftwatermark}
 \SetWatermarkAngle{45}
 \SetWatermarkScale{1.75}
 \SetWatermarkColor{red!15}
 \SetWatermarkFontSize{42pt}
 \SetWatermarkText{\shortstack{\bfseries\sffamily DRAFT! \\ [1em] \bfseries\sffamily DRAFT! \\ [1em ]\bfseries\sffamily DRAFT! }}
+\fi
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -91,30 +93,33 @@
 	\input{title/title.tex}
 	
 	\tableofcontents
-	
-	%    \maketitle
-	
-	%\thispagestyle{empty}
+
 	\newpage
 	
 	\section*{Nomenclature}
 	
 	{\renewcommand\arraystretch{1.0}
 		\noindent\begin{longtable}{@{}l @{\quad=\quad} l@{}}
-			$A$  & amplitude of oscillation \\
-			$a$ &    cylinder diameter \\
-			$C_p$& pressure coefficient \\
-			$Cx$ & force coefficient in the \textit{x} direction \\
-			$Cy$ & force coefficient in the \textit{y} direction \\
-			c   & chord \\
-			d$t$ & time step \\
-			$Fx$ & $X$ component of the resultant pressure force acting on the vehicle \\
-			$Fy$ & $Y$ component of the resultant pressure force acting on the vehicle \\
-			$f, g$   & generic functions \\
-			$h$  & height \\
-			$i$  & time index during navigation \\
-			$j$  & waypoint index \\
-			$K$  & trailing-edge (TE) nondimensional angular deflection rate
+
+			$c_p$ & specific heat at constant pressure, $\unit{\joule/\kilogram.\kelvin}$\\
+			$c_\nu$ & specific heat at constant volume, $\unit{\joule/\kilogram.\kelvin}$\\
+			$e$ & specific internal energy, $\unit{\joule}$\\
+			$h$ & specific enthalpy, $\unit{\joule}$ \\
+			$M$ & Mach \\
+			$p$  & pressure, $\unit{\pascal}$ \\
+			$q$ & heat, $\unit{\joule}$\\
+			$R$ & gas constant, $\unit{\joule/\kilogram.\kelvin}$ \\
+			$s$ & entropy, $\unit{\joule/\kelvin}$\\
+			$T$ & temperature, $\unit{\kelvin}$\\
+			$t$ & time, $\unit{\second}$\\
+			$u$& velocity, $\unit{\meter/\second}$ \\
+			$w$ & work, $\unit{\joule}$\\
+			$\gamma$ & ratio of specific heats\\
+			$\mu$ & mean\\
+			$\nu$ & specific volume, $\unit{\meter^3/\kilogram}$\\
+			$\rho$ & density, $\unit{\kilogram/\meter^3}$ \\
+			$\sigma$ & standard deviation\\
+			$\tau$ & compressibility coefficient 
 	\end{longtable}}
 	
 	\addcontentsline{toc}{section}{Nomenclature}
