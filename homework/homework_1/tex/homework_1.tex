@@ -1,4 +1,5 @@
 \documentclass[12pt,letterpaper]{article}
+
 \usepackage{fullpage}
 \usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
@@ -26,6 +27,7 @@
 \usepackage{derivative}
 \usepackage{physics}
 \usepackage{cancel}
+\usepackage{empheq}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -78,6 +80,7 @@
 %\newcommand\Name{\author}                
 
 \begin{document}
+	\graphicspath{{../images}}
 	\input{title/title.tex}
 	
 	\tableofcontents
@@ -590,6 +593,7 @@
 		\begin{enumerate}[label=\arabic*.]
 		\addcontentsline{toc}{subsection}{(a)}
 			\item{\textbf{Discussion}} \\
+			% TODO: clean up this discussion
 			Isentropic relations are valid for measuring state variables of a high speed flow in the Ludwieg tube, although it is important to remember that they rely on assumptions to simplify real-world flow phenomena. The accuracy of the isentropic flow relations likely falls within the accuracy of the pressure sensors, so making an approximation that falls within an existing known uncertainty does not grossly affect confidence in the variance of data. In addition, the initial conditions of the flow in the Ludwieg tube are well below the temperature limits where the TPG assumption would break down. The flow is non-reacting and non-dissociating due to its relative slowness and coldness. 
 			\\
 			An issue with the assumption of isentropic flow in the tunnel is that the measurements are being taken on the wall where there is a boundary layer. The boundary layer growth impacts the measurements taken by the transducers and does not paint an accurate picture of the freestream flow conditions. By measuring at the wall, viscous effects are introduced into the measurements; isentropic relations fundamentally assume that flow is inviscid, with no dissipative effects in the flow. Unless thoroughly validated with viscous modeling to ensure that isentropic relationships carry a sufficiently small error, it is questionable to use these assumptions.%TODO: add to this
@@ -598,29 +602,80 @@
 		\item Plot the pressure, density, and temperature of the flow in the test section versus the test time $t$, using data from the .xlsx file.
 		\addcontentsline{toc}{subsection}{(b)}
 		\begin{enumerate}[label=\arabic*.]
-			\item{\textbf{Givens}}
-			asd
+			\item{\textbf{Givens}}\\
+			HW\_1\_Data.xlsx
 			\addcontentsline{toc}{subsubsection}{Givens}
 			
 			\item{\textbf{Assumptions}}\\
 			Assume that these are set to $p = 1380 \ \unit{kPa}$ and $T = 500 \ \unit{K}$ and can be assumed constant throughout the duration of the test because the air there is more-or-less stagnant and does not move. 
+			Assuming ideal gas, isentropic flow. 
 			\addcontentsline{toc}{subsubsection}{Assumptions}
-			\item{\textbf{Solution}}\\
-			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
+			\item{\textbf{Calculations}}\\
+			Given the starting temperature and pressure, the initial density of the upstream air is easily calculated using the ideal gas law.
+			\begin{align*}
+				P &= \rho R T\\
+				\rho &= \frac{P}{RT}\\
+				\rho_{init} &= \frac{1380000 \left[\unit{\pascal}\right]}{287 \left[\frac{\unit{\joule}}{\unit{\kilogram.\kelvin}}\right] 500 \ [\unit{\kelvin}]}\\
+				\rho_{init} & = 9.62 \left[\frac{\unit{\kilogram}}{\unit{\meter^3}}\right]
+			\end{align*}
+			Knowing the initial density and pressure of the fluid in the tunnel allows us to calculate the ratio $P/\rho^{\gamma}$ which is equal to some constant value for an isentropic flow.
+			\begin{align*}
+				\frac{P}{\rho^{\gamma}} &= C\\
+				\frac{P}{\rho^{\gamma}} &= 58028.46 \left[\frac{\unit{\pascal}}{\unit{\kilogram\per\meter^3}}\right]
+			\end{align*}
+			The constant calculated above can be used in conjunction with the test section time history found in \textit{HW\_1\_Data.xlsx} to calculate the time history of density in the test section using the following equation:
+			\begin {equation*}
+				\rho_i = \left(\frac{P_i}{58028.46 \left[\frac{\unit{\pascal}}{\unit{\kilogram\per\meter^3}}\right]}\right)^{\frac{1}{\gamma}}
+			\end{equation*}
+			Once the density at every point in time is known, the thermodynamic state of the fluid in the Ludwieg tube is fully defined and the temperature is easily found using the ideal gas equation of state:
+			\begin{equation*}
+				T_i = \frac{P_i}{\rho_i R}
+			\end{equation*}
+			All calculations for the time histories were performed in Python, see Appendix \ref{Problem3Python} for relevant code. 
+			
+			\addcontentsline{toc}{subsubsection}{Calculations}
+			\item{\textbf{Figures}}\\
+			\addcontentsline{toc}{subsubsection}{Figures}
+
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.7]{pressure_vs_time}
+				\label{Pressure_vs_Time}
+				\caption{Pressure vs. Time in Test Section}
+			\end{figure}
+
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.7]{temperature_vs_time}
+				\label{Temperature_vs_Time}
+				\caption{Temperature vs. Time in Test Section}
+			\end{figure}
+
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.7]{density_vs_time}
+				\label{Density_vs_Time}
+				\caption{Density vs Time. in Test Section}
+			\end{figure}
+			\vspace{10in}
+			
 		\end{enumerate}
-			\item Generally useful wind-tunnel data is collected n the test section between $25 < t < 75 \  ms$. How "steady" is the pressure during that period (i.e., what is the standard deviation about the mean value during that time)?
+			\clearpage
+			\item Generally useful wind-tunnel data is collected n the test section between $25 < t < 75 \  ms$. How "steady" is the pressure during that period (i.e., what is the standard deviation about the mean value during that time?
 			\addcontentsline{toc}{subsection}{(c)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
 			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
-			\item{\textbf{Assumptions}}\\
-			\addcontentsline{toc}{subsubsection}{Assumptions}
-			sdf
+			$t = [25\,,75] \ \unit{ms}$
 			\item{\textbf{Solution}}\\
+			Using Python's \textit{statistics} module, the mean and standard deviation of the pressure measurements between $25 < t < 75 \ \unit{ms}$ are easily calculated:
+			
+			\begin{empheq}[box=\fbox]{align}
+				\mu_{pressure} &= 729.27 \ \unit{Pa}\\
+				\sigma_{pressure} &= 23.56 \ \unit{Pa}
+			\end{empheq}
+
 			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
 		\end{enumerate}
 			\item At $t=50 \ \unit{\milli\second}$, what is the entropy difference between the upstream and test-section air? Recall,
 			\begin{equation*}
@@ -630,14 +685,35 @@
 			\addcontentsline{toc}{subsection}{(d)}
 		\begin{enumerate}[label=\arabic*.]
 			\item{\textbf{Givens}}\\
+			$c_p = 1000 \ \unit{\joule/\kilogram.\kelvin}$\\
+			$R = 287 \ \unit{\joule/\kilogram.\kelvin}$\\
+			$T_1 = 500 \ K$\\
+			$p_1 = 1380 \ \unit{kPa}$
 			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
+
 			\item{\textbf{Assumptions}}\\
+			Assuming isentropic flow for purposes of solving relations to get all needed values. 
 			\addcontentsline{toc}{subsubsection}{Assumptions}
-			sdf
+
 			\item{\textbf{Solution}}\\
+			Given the previously calculated time histories for temperature and density, in cojunction with the pressure time history in the dataset, conditions at $t = 50 \ \unit{ms}$ are identified:
+			\begin{align*}
+				p_{50  \unit{ms}} &= 766.99 \ \unit{Pa}\\
+				T_{50  \unit{ms}} &= 58.74 \ K
+			\end{align*}\
+			
+			Substituting into the given equation:
+			\begin{equation*}
+				s_2 - s_1 = 1000 \left[\frac{\unit{\joule}}{\unit{\kilogram}\cdot \unit{\kelvin}}\right] 
+				\ln{\left(\frac{58.74 \ [\unit{\kelvin}]}{500 \ [\unit{\kelvin}]}\right)}
+				- 287 \left[\frac{\unit{\joule}}{\unit{\kilogram}\cdot \unit{\kelvin}}\right] 
+				\ln{\left(\frac{766.99 \ [\unit{\pascal}]}{1380000 \ [\unit{\pascal}]}\right)}
+			\end{equation*}
+			\begin{equation*}
+				\boxed{s_2-s_1 = 9.64 \ \unit{\joule/\kilogram.\kelvin}}
+			\end{equation*}
 			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
+			
 		\end{enumerate}
 			\item What do the isentropic relations show happens to the temperature of the flow as it expands to Mach-6? Look up the liquefaction temperature of air. What is it in Kelvin? With
 			this knowledge, why do you think the air accelerated through high-speed wind tunnels is
@@ -659,15 +735,21 @@
 			difference is clearly the reference frame. If a hypersonic boost-glide vehicle is flying at Mach-6 at an altitude of 40 km where the air temperature is $\approx$ 250 K, do you think the air liquefies as it travels over the vehicle? Explain your reasoning.
 			\addcontentsline{toc}{subsection}{(f)}
 		\begin{enumerate}[label=\arabic*.]
-			\item{\textbf{Givens}}\\
-			\addcontentsline{toc}{subsubsection}{Givens}
-			sdf
-			\item{\textbf{Assumptions}}\\
-			\addcontentsline{toc}{subsubsection}{Assumptions}
-			sdf
-			\item{\textbf{Solution}}\\
-			\addcontentsline{toc}{subsubsection}{Solution}
-			sdf
+			\item{\textbf{Discussion}}\\
+			% TODO: clean up this discussion
+			 Air will not liquefy when traveling over a Mach 6 boost-glide vehicle despite the low ambient temperature. 
+			 The main difference between the air in the Ludwieg tube and the freestream air going over the Mach 6 vehicle hinges on the stagnation conditions of the flow.
+			 The air in the Ludwieg tube is initially stagnant, with no velocity, and has to go through an expansion to achieve the Mach 6 condition.
+			 This expansion is what causes the massive pressure drop that can lead to liquefaction of the air in the tunnel. 
+			 When a boost-glide vehicle is traveling at Mach 6, the freestream air surrounding the vehicle does not have to undergo such a massive expansion.
+			 In fact, the air is rapidly compressed by the vehicle's motion, causing shockwaves and temperature and density \textit{spikes}. \\
+			 The stagnation/total conditions of a flow are dependent on the reference frame used to define them. 
+			 Wind tunnel experimentation can rarely kinematically match both the Reynolds and Mach numbers in a flow.
+			 Depending on whether the vehicle is fixed in the reference frame or a volume of air is fixed, the total conditions of the flow can vary.
+			 The disparity between achievable conditions in a wind tunnel and flight conditions largely hinges on the enthalpies achievable, which is why ground tests and computational modeling must work in conjunction.
+			  
+			\addcontentsline{toc}{subsubsection}{Discussion}
+			
 		\end{enumerate}
 	\end{enumerate}
 
@@ -675,11 +757,13 @@
 	
 	\begin{appendices}
 		\section{Problem 1 Python Code}
-		\lstinputlisting[language=Python]{../python/homework_1.py}
+		\lstinputlisting[language=Python,lastline=27]{../python/homework_1.py}
 		
 		\newpage
 
 		\section{Problem 3 Python Code}
+		\label{Problem3Python}
+		\lstinputlisting[language=Python,firstline=28]{../python/homework_1.py}
 		\newpage
 	\end{appendices}
 	
