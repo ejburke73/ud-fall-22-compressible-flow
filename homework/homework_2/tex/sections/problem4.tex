@@ -1,0 +1,93 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{4}
+
+You will use this problem to derive the \textbf{differential} form of conservation of mass and momentum for \textbf{inviscid} flowfields.
+You will do this by applying the integral form of these governing equations to a differential-element control volume.
+
+\begin{enumerate}[label = (\alph*)]
+
+    \item \textbf{Conservation of Mass:}
+        \[
+            \pdv{\rho}{t} + \pdv{(\rho u)}{x} + \pdv{(\rho v)}{y} + \pdv{(\rho w)}{z} = 0
+        \]
+
+        Watch the attached lecture from my undergraduate fluid-mechanics class and follow the steps to derive the differential form of the continuity equation.
+        Be explicity about your assumptions and make the derivation your own.
+
+    \item \textbf{(Inviscid) Conservation of Momentum:}
+    
+        \begin{align*}
+            \rho \left({\pdv{u}{t} + u \pdv{u}{x} + v \pdv{u}{y} + w \pdv{u}{z}}\right) &= \rho g_x - \pdv{p}{x} + \mu \left({\pdv[2]{u}{x} + \pdv[2]{u}{y} + \pdv[2]{u}{z}}\right)\\
+            \rho \left({\pdv{v}{t} + u \pdv{v}{x} + v \pdv{v}{y} + w \pdv{v}{z}}\right) &= \rho g_y - \pdv{p}{y} + \mu \left({\pdv[2]{v}{x} + \pdv[2]{v}{y} + \pdv[2]{v}{z}}\right)\\
+            \rho \left({\pdv{w}{t} + u \pdv{w}{x} + v \pdv{w}{y} + w \pdv{w}{z}}\right) &= \rho g_z - \pdv{p}{z} + \mu \left({\pdv[2]{w}{x} + \pdv[2]{w}{y} + \pdv[2]{w}{z}}\right)\\
+        \end{align*}
+
+    \begin{enumerate}[label = (b\arabic*)]
+
+        \item 
+            Draw your differential element with coordinate system.
+            Label each side \(\delta x, \delta y, \ \textrm{and} \ \delta z\), respectively.
+
+        \item
+            Label each of the six sides with the appropriate momentum values.
+            Include the direction of the momentum with arrows.
+            This process will be identical to what we did for Continuity, except now we will have an additional velocity (i.e., \(\vec{V}\)) term since we are talking about momentum.
+            FOr example, the left-hand-side of the differential element should hae \(\rho u \vec{V}\) flowing into it instead of just \(\rho u\).
+            You can show this analysis on one single differential-element drawing, or three separate ones.
+
+        \item
+            Now, write out the left-hand-side of the general Integral Momentum Equation, state the relevant assumptions/simplifications based on your differential element control-volume drawing(s), and simplify each term as much as you can.
+
+        \item
+            Tabulate the influx and outflux of momentum for each face.
+            Do not forget about the corresponding area terms.
+
+        \item
+            Populate your simplified Momentum Equation with these influx and outflux terms appropriately.
+
+        \item
+            Show how the three outflux terms cancel with the three influx terms to give:
+            \[
+                \left[{
+                    \pdv{(\rho \vec{V})}{t} + \pdv{(\rho u \vec{V})}{x} + \pdv{(\rho v \vec{V})}{y} + \pdv{(\rho w \vec{V})}{z}
+                }\right]
+                \delta x \delta y \delta z
+            \]
+        
+        \item
+            Each individual term in Eq. can be broken up via the Chain Rule for derivatives, which states:
+            \[
+                \pdv{(ab)}{c} = a\pdv{(b)}{c} + b\pdv{(a)}{c}  
+            \]
+            Use this rule to break up each of the four partial derivatives in Eq. .
+            For terms 2-4, treat the products $\rho u$, $\rho v$, and $\rho w$ as $a$ from Eq. , and $\vec{V}$ as $b$.
+            That is, term 2 from Eq. can be split up as:
+            \[
+                \pdv{(\rho u \vec{V})}{x} = \rho u \pdv{(\vec{V})}{x} + \vec{V}\pdv{(\rho u)}{x}   
+            \]
+            Your updated Eq. should now have eight terms inside the brackets.
+            Four of these terms are the Differential Continuity Equation and their combination can therefore be set to zero.
+            Show this, and show that the neq equation is:
+            \[
+                \left[{
+                    \rho\pdv{(\vec{V})}{t} + \rho u\pdv{(\vec{V})}{x} + \rho v\pdv{( \vec{V})}{y} + \rho w \pdv{(\vec{V})}{z}
+                }\right]
+                \delta x \delta y \delta z
+            \]
+            Woohoo, this is the final form of the left-hand-side of the Differential Momentum Equation!
+
+        \item
+            Now calculate the forces due to gravity and pressure on the differential element and add them to the right hand side of your differential momentum equation.
+            Note: for pressure, you may allow for pressure to change in each direction across your differential element via a Taylor-Series-Expansion first-order approximation like you've done in other parts of the problem.
+        
+        \item
+            Put everything together and write the final form appropriately for the $x, y, \textrm{and} z$ directions to give the $x, y, \textrm{and} z$ differential momentum equations. 
+        
+    \end{enumerate}
+    
+\end{enumerate}
+
+\end{document}

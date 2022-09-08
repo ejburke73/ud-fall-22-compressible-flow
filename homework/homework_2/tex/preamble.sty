@@ -1,0 +1,126 @@
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{bookmark}
+\usepackage{listing}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{titling}
+\usepackage{svg}
+\usepackage{longtable}
+\usepackage[title,titletoc]{appendix}
+\usepackage[UKenglish]{isodate}
+\usepackage{derivative}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{empheq}
+\usepackage{subfiles}
+\usepackage{titlesec} 
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\cleanlookdateon% Remove ordinal day reference
+\lstset{style=mystyle}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\pagestyle{fancyplain}
+\headheight 35pt
+\rhead{\theauthor\\\today}               
+\chead{\textbf{\Large \assignmentname{}}}
+\lhead{\coursenumber\\\coursename{}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+\renewcommand{\headrulewidth}{2pt}
+
+% Removes line break after subsections %%and subsubsections
+
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+%\titleformat{\subsubsection}[runin]
+%  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+
+% Creates subsection titled {} and adds to toc without number
+
+\newcommand\subsec[1]{%
+  \subsection*{#1}%
+  \addcontentsline{toc}{subsection}{#1}}
+
+% Creates a section titled Problem {#} and adds to TOC without number
+
+\newcommand\problem[1]{%
+  \section*{Problem #1}%
+  \addcontentsline{toc}{section}{Problem #1}}
+
+% Creates a subsection titled ({alph}) and adds to TOC without number
+
+\newcommand\problempart[1]{%
+	\subsection*{(#1)}%
+	\addcontentsline{toc}{subsection}{(#1)}}
+
+%\newcommand\givens{%
+%	\subsubsection*{\textbf{\underline{Givens}}}}
+
+%\newcommand\assumptions{%
+%	\subsubsection*{\textbf{Assumptions}}}
+
+%\newcommand\solution{%
+%	\subsubsection*{\textbf{Solution}}}
+
+%\newcommand\discussion{%
+%	\subsubsection*{\textbf{Discussion}}}
+
+\newcommand\givens{%
+	\underline{\textbf{Givens:}}\par}
+
+\newcommand\assumptions{%
+	\underline{\textbf{Assumptions:}}\par}
+
+\newcommand\solution{%
+	\underline{\textbf{Solution:}}\par}
+
+\newcommand\discussion{%
+	\underline{\textbf{Discussion:}}\par}
+
+\newcommand\bolditemnolabel[1]{%
+	\item[] \textbf{#1}}
+
+
+	

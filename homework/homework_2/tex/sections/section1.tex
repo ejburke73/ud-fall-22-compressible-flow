@@ -1,0 +1,53 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{1}
+
+The final Reynolds Transport Theorem we derived in class looked like:
+
+\begin{equation*}
+    \frac{\dd B_{sys}}{\dd t} = %
+    \frac{\dd (mb)_{sys}}{\dd t} = %
+    \pdv{t} \int_{CV} \rho b \dd V +%
+    \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A -%
+    \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A
+\end{equation*}
+
+\begin{enumerate}[label = (\alph*)]
+
+    \item In your own words, describe what each of the three terms on the right-hand-side of the equation mean related to an arbitrary fluid extensive property, $B$.
+
+    \item If our problem was in the $x-y-z$ space, how would you represent the integrals \(\int_{CV} \dd V\) and \(\int_{CS} \dd A\) in terms of triple and double integrals, respectively?
+
+    \item Why are the last two terms integral terms?
+
+    \item What does the subscript ``n'' mean for the last two terms? Why do we need that there?
+   
+    \item Why do we need the absolute magnitude signs around the \(\vec{V}_n\) terms?
+   
+    \item Why is the derivative with-respect-to \(t\) a partial derivative?
+   
+    \item Explain to a classmate how our 
+        \[
+            \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A -%
+            \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A
+        \]
+        term is equivalent to
+
+        \[
+            \int_{CS} b \rho \boldsymbol{V} \cdot \hat{\boldsymbol{n}} \dd A \, ,
+        \]
+
+        which is equivalent to
+
+        \[
+            \int_{CS} b \rho \vec{V} \cdot \dd \vec{A} \, .
+        \]
+
+        Be sure to explain the different math concepts. You may find it easier to ``explain'' by using a simple control-volume problem as an illustration.
+        
+\end{enumerate}
+
+
+\end{document}
