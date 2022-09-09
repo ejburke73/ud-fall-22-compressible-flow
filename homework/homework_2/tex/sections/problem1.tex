@@ -9,7 +9,7 @@ The final Reynolds Transport Theorem we derived in class looked like:
 \begin{equation*}
     \frac{\dd B_{sys}}{\dd t} = %
     \frac{\dd (mb)_{sys}}{\dd t} = %
-    \pdv{t} \int_{CV} \rho b \dd V +%
+    \pdv{t} \int_{CV} \rho b \dd \volume +%
     \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A -%
     \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A
 \end{equation*}
@@ -18,16 +18,51 @@ The final Reynolds Transport Theorem we derived in class looked like:
 
     \item In your own words, describe what each of the three terms on the right-hand-side of the equation mean related to an arbitrary fluid extensive property, $B$.
 
-    \item If our problem was in the $x-y-z$ space, how would you represent the integrals \(\int_{CV} \dd V\) and \(\int_{CS} \dd A\) in terms of triple and double integrals, respectively?
+        \begin{itemize}
 
+            \item The first term on the RHS of the equation deals with the time rate change of some extensive property, $B$, expressed in terms of its intensive version, $b = B/m$.
+            This is specifically the rate of change of the property within some control volume (CV) that we have arbitrarily defined for the purposes of analyzing a problem.
+            In a steady-state problem, this term is 0, as there will be no dependency on time in that case.
+            \item The second term on the RHS of the equation treats the flux of the intensive property $b$ \textit{out} of the CV across every control surface (CS).
+            The velocity term is specifically the velocity normal to each CS, in order to capture the convective effect of a fluid's motion through a CV.
+            \item The third term on the RHS of the equation is identical to the second term except instead of treating flux of $b$ \textit{out} of the CV, it treats flux of $b$ \textit{into} the CV.
+            As before, the velocity term present in this term is specifically the velocity normal to each CS. 
+            The sign convention for the fluxes is simplified in this casting of the Reynolds Transport Theorem (RTT).
+
+        \end{itemize}
+
+    \item If our problem was in the $x-y-z$ space, how would you represent the integrals \(\int_{CV} \dd V\) and \(\int_{CS} \dd A\) in terms of triple and double integrals, respectively?
+    
+    In $x-y-z$ space, the integrals can be expressed as follows:
+
+    \[\int_{CV} \dd \volume \rightarrow \int_x \int_y \int_z \dd x \dd y \dd z\]
+
+    \[\int_{CS} \dd A \rightarrow \int_x \int_y \dd x \dd y\]
+
+    \textit{Note: The two specific dimensions in the second integral will vary depending on the orientation of the control surfaces relative to the major axes.}
+        
     \item Why are the last two terms integral terms?
 
+    The last two terms are integral terms because the fluid density and velocity can vary across a CS.
+    By integrating across the CS, the full behavior at the boundaries can be captured.
+    If there is no variation in any of the properties in either spatial dimension making up $\dd A$, there is no need for an integral. 
+
     \item What does the subscript ``n'' mean for the last two terms? Why do we need that there?
-   
+    
+    The subscript ``n'' indicates that the velocities are \textbf{normal} to the CS.
+    In this casting of the RTT we sidestep the need for vector calculus and confusing sign conventions by simply calling for the normal velocity magnitude.
+    Polarity of the terms are simply defined by whether a flux is ``in'' or ``out'' of the CS.
+
     \item Why do we need the absolute magnitude signs around the \(\vec{V}_n\) terms?
    
+    The absolute magnitude signs around the velocity terms are required for a similar reason as the ``n'' subscript: to simplify the handling of sign conventions.
+    Taking the absolute magnitude of velocity removes the complexity of juggling multiple conflicting signs between velocity vectors, magnitudes, and CS normal vectors. 
+
     \item Why is the derivative with-respect-to \(t\) a partial derivative?
    
+    The derivative w.r.t $t$ is a partial derivative because the quantities inside the partial derivative do not only vary in time --- they can also vary spatially.
+    Isolating the time-variant component of the intensive property $b$ inside the CV helps capture the generation term required for proper bookkeeping of the extensive property $B$. 
+
     \item Explain to a classmate how our 
         \[
             \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A -%
@@ -47,6 +82,76 @@ The final Reynolds Transport Theorem we derived in class looked like:
 
         Be sure to explain the different math concepts. You may find it easier to ``explain'' by using a simple control-volume problem as an illustration.
         
+        The second and third terms of the RHS of RTT are a decomposition of a term defined using vector notation.
+        Beginning with the third integral form, we isolate the term \(\vec{V} \cdot \dd \vec{A}\).
+        The mathematical meaning of \(\vec{V}\) is the fluid's velocity vector in component form (i.e., \(\hat{i}, \hat{j}, \hat{k}\) form).
+        Similarly, \(\dd \vec{A}\) is the vector notation for a differential area \textit{including its normal direction}.
+        As with any other vector, \(\dd \vec{A}\) can be expressed in terms of a magnitude and direction.
+        For the differential area, the magnitude is simply \(\dd A\), and the normal direction can be generically expressed as \(\hat{\mathbf{n}}\).
+        We can rewrite \(\dd \vec{A}\) as \(\hat{\mathbf{n}} \dd A\), as seen in the second integral form.
+        The vector dot product in the third integral now becomes the dot product of the velocity vector and the differential area's normal vector, i.e., \(\mathbf{V} \cdot \hat{\mathbf{n}}\).
+
+        Isolating the term \(\mathbf{V} \cdot \hat{\mathbf{n}}\), we recall the definition of a dot product and scalar projection. 
+        The dot product is defined in euclidean space as \(\vec{a} \cdot \vec{b} = \norm{a}\norm{b}\cos{\theta}\).
+        The scalar projection is defined in euclidean space as \(\mathbf{a} \cdot \hat{\mathbf{b}} = \norm{a} \cos\theta\).
+        A scalar projection is a unique case of a dot product where one of the vector terms is a unit vector, denoted by \(\hat{\mathbf{v}}\).
+        The result of the scalar projection is the magnitude of the vector \(\mathbf{a}\) in the direction of the unit vector \(\hat{\mathbf{b}}\).
+        Replacing \(\hat{\mathbf{b}}\) with \(\hat{\mathbf{n}}\), we see that the output of the scalar product \(\mathbf{V} \cdot \hat{\mathbf{n}}\) is the magnitude of the velocity vector projected onto the normal vector of the CS, which can be expressed as \(\pm\lvert\vec{V}_n\rvert\), depending on the vector orientation.
+
+        To understand the polarity associated with the scalar projection, we recall the behavior of $\cos{\theta}$ on $\left[{0, 2\pi}\right]$ to obtain the following ``boundary conditions'' for the function:
+
+        \begin{align*}
+            \cos{(0)} &= 1\\
+            \cos{(\pi/2)} &= 0\\
+            \cos{(\pi)} &= -1\\
+            \cos{(3\pi/2)} &= 0
+        \end{align*}
+
+        Examining these four conditions inform us about the importance of understanding the convective vector's direction relative to a CS.
+        If the velocity vector is flowing \textit{in} to the CS it will be oriented opposite the normal vector defining the CS (outward by convention), making the angle between velocity and normal vector \(\theta = \pi\).
+        With this and the behavior of the $\cos$ function in mind, we see that \(\mathbf{V} \cdot \hat{\mathbf{n}}\) for an influx will have a negative polarity.
+        Following the same logic for an outflux, where the velocity vector and CS normal vector make an angle of \(\theta = 0\), we see that an outflux will have a positive polarity.
+
+        \textit{Note: another interesting observation from the behavior of $\cos()$ is that perpendicular vectors, with \(\theta =  \pi n/2\), result in 0 flux across a CS.}
+
+        We now have all of the building blocks required to connect the three integral forms.
+        We have shown that
+
+        \[\vec{V} \cdot \dd \vec{A}\]
+
+        is equivalent to
+        \[\mathbf{V} \cdot \hat{\mathbf{n}} \dd A\,,\]
+
+        and that 
+
+        \[\mathbf{V} \cdot \hat{\mathbf{n}} = \pm \lvert{\vec{V}_n}\rvert\]
+
+        depending on the vector orientation.
+
+        Next, we have proven that velocity vectors flowing \textit{into} a CS will have a negative polarity, and velocity vectors flowing \textit{out of} a CS will have a positive polarity.
+        
+        \begin{align*}
+        cos(0) &= 1\\
+        cos(\pi) &= -1
+        \end{align*}
+
+        Therefore, 
+
+        \begin{align*}
+            \mathbf{V}_{inflow} \cdot \hat{\mathbf{n}} &= - \lvert{\vec{V}_n}\rvert\\\
+            \mathbf{V}_{outflow} \cdot \hat{\mathbf{n}} &= + \lvert{\vec{V}_n}\rvert\
+        \end{align*}
+
+        Thus,
+
+        \[
+            \int_{CS} b \rho \vec{V} \cdot \dd \vec{A}
+            =
+            \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A -%
+            \int_{CS,out} b \rho \lvert{\vec{V_n}}\rvert \dd A
+        \]
+        
+
 \end{enumerate}
 
 
