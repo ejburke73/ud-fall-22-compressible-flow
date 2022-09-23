@@ -111,23 +111,127 @@ The full integral form of the conservation of momentum equation is given by
     \sum{\vec{F}_{CV}}
 \end{equation*}
 
-The sum of forces acting on the CV, \(\sum{\vec{F}_{CV}}\), can be found by summing the surface forces and body forces acting on the system. 
+This is a vector equation that can be decomposed into its \(x,\, y, \, \textrm{and} \ z\) components as shown below:
 
-\begin{equation*}
-    \sum{\vec{F}_{CV}} =%
-    \int_{CV} \rho \vec{\mathbf{f}} \dd \volume -
-    \int_{CS} p \hat{\mathbf{n}} \dd A +
-    \vec{F}_{viscous} +
-    \sum \vec{R} 
-\end{equation*}
+\begin{align*}
+    \pdv{t} \int_{CV} \rho \vec{u} \dd \volume +%
+    \int_{CS} \rho \vec{u} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A &=%
+    \sum{\vec{F}_{CV_x}}\\
+    \pdv{t} \int_{CV} \rho \vec{v} \dd \volume +%
+    \int_{CS} \rho \vec{v} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A &=%
+    \sum{\vec{F}_{CV_y}}\\
+    \pdv{t} \int_{CV} \rho \vec{w} \dd \volume +%
+    \int_{CS} \rho \vec{w} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A &=%
+    \sum{\vec{F}_{CV_z}}
+\end{align*}
+
+This problem is 2-dimensional in \(x \, \textrm{and} \, y\), so we can safely ignore the \(z\) component.
+Applying our assumptions and observations to the momentum equation greatly simplifies their forms. 
+\par
+By applying the steady flow assumption, the time-dependency of the equations disappears:
+
+\begin{align*}
+    \cancelto{0}{\pdv{t} \int_{CV} \rho \vec{u} \dd \volume} +%
+    \int_{CS} \rho \vec{u} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A &=%
+    \sum{\vec{F}_{CV_x}}\\
+    \cancelto{0}{\pdv{t} \int_{CV} \rho \vec{v} \dd \volume} +%
+    \int_{CS} \rho \vec{v} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A &=%
+    \sum{\vec{F}_{CV_y}}
+\end{align*}
+
+Next, the uniform flow assumption allows us to remove the integrand from the integral as they are invariant over the control surface, though the terms must still be evaluated at each CS>
+
+\begin{align*}
+    \left. \left( \rho \vec{u} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \int_{CS} \dd A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_x}}\\
+    \left. \left( \rho \vec{v} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \int_{CS}  \dd A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_y}}
+\end{align*}
+
+The integral is now simple, and becomes \(A\), the area of each CS that the equation is evaluated upon.
+
+\begin{align*}
+    \left. \left( \rho \vec{u} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_x}}\\
+    \left. \left( \rho \vec{v} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_y}}
+\end{align*}
+
+The assumption of normal flow velocity at each inlet/outlet allows us to replace \(\left({\vec{V} \cdot \hat{\mathbf{n}}}\right)\) with \(\lvert\vec{V}\rvert\).
+\textit{Note: the simplification of the dot product removes a polarity on the velocity term. For inlets, the entire term is negative, and for outlets, it will be positive.}
+
+\begin{align*}
+    \left. \left( \rho \vec{u} \lvert\vec{V}\rvert  A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_x}}\\
+    \left. \left( \rho \vec{v} \lvert\vec{V}\rvert  A \right) \right|_{CS} &=%
+    \sum{\vec{F}_{CV_y}}
+\end{align*}
+
+The RHS of each equation can be defined by evaluating the forces that act on the control volume.
+Our assumptions explicitly disregard gravity (body force) and shear stress (surface force).
+The CV does not have rigid walls or supports, therefore we can ignore reaction forces.
+The final remaining component is pressure, a surface force.
+We assume that the pressure on each CS is \(P_{atm}\), therefore there is no net pressure differential acting on the CV.
+With these assumptions and observations, we conclude that the net force in both \(x \, \textrm{and} \, y\) is 0.
+
+\begin{align*}
+    \left. \left( \rho \vec{u} \lvert\vec{V}\rvert A \right) \right|_{CS} &=%
+    0\\
+    \left. \left( \rho \vec{v} \lvert\vec{V}\rvert A \right) \right|_{CS} &=%
+    0
+\end{align*}
+
+We now evaluate the momentum equation in the \(x \, \textrm{and} \, y\) at each CS, beginning with \(x\), remembering that inlets are negative and outlets are positive.
 
 \[
-    \pdv{t} \int_{CV} \rho \vec{V} \dd \volume +%
-    \int_{CS} \rho \vec{V} \left({\vec{V} \cdot \hat{\mathbf{n}}}\right) \dd A =%
-    \int_{CV} \rho \vec{\mathbf{f}} \dd \volume -
-    \int_{CS} p \hat{\mathbf{n}} \dd A +
-    \vec{F}_{viscous} +
-    \sum \vec{R} 
+  \rho_e u_e \lvert\vec{V}_e\rvert A_e - \rho_1 u_1^2 A_1 = 0
+\]
+
+We recognize that \(u_e\) can be recast as \(V_e \cos \theta\).
+
+\[
+  \rho_e \left({V_e \cos \theta}\right) \lvert\vec{V}_e\rvert A_e - \rho_1 u_1^2 A_1 = 0
+\]
+
+The momentum equation in the \(y\) direction follows the same logic.
+
+\[
+    \rho_e \left({V_e \sin \theta}\right) \lvert\vec{V}_e\rvert A_e - \rho_2 v_v^2 A_2 = 0
+\]
+
+%%%%%%%%%%%%
+
+We now recast the momentum equations in terms of mass flow rates found from the continuity equation:
+
+\begin{align*}
+    \dot{m}_e V_e \cos \theta - \dot{m}_1 u_1 &= 0\\
+    \dot{m}_e V_e \sin \theta - \dot{m}_2 v_2 &= 0
+\end{align*}
+
+Rearranging both equations to solve for a common term:
+
+\begin{align*}
+    \dot{m}_e V_e &= \frac{\dot{m}_1 u_1}{\cos \theta} \\
+    \dot{m}_e V_e &= \frac{\dot{m}_2 v_2}{\sin \theta } 
+\end{align*}
+
+We now set the equations equal and solve for \(\theta\).
+
+\begin{align*}
+    \frac{\dot{m}_1 u_1}{\cos \theta} &=
+    \frac{\dot{m}_2 v_2}{\sin \theta} \\
+    \frac{\sin \theta}{\cos \theta} &=
+    \frac{\dot{m}_2 v_2}{\dot{m}_1 u_1}\\
+    \tan \theta &=
+    \frac{\dot{m}_2 v_2}{\dot{m}_1 u_1}
+\end{align*}
+
+Taking the inverse tangent provides our final expression for \(\theta\):
+
+\[
+    \boxed{
+    \theta = \tan^{-1}\left({\frac{\dot{m}_2 v_2}{\dot{m}_1 u_1}}\right)
+    }
 \]
 
 
