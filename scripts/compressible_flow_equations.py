@@ -23,7 +23,6 @@ class CompressibleFlow:
         if self.rho_static and self.t_static and not self.p_static:
             self.p_static = self.rho_static*self.R*self.t_static
 
-        
     def sonic_velocity(gamma=1.4,R=287,T=None):
         if T:
             a = (gamma*R*T)**.5

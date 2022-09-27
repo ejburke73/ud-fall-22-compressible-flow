@@ -98,6 +98,24 @@ def get_sonic_velocity(gamma=1.4,R=287,T=None,p=None,rho=None):
     print('Speed of sound = {a}')
     return a
 
+def get_fluid_velocity(M=None,a=None,gamma=1.4,R=287,p=None,rho=None,T=None):
+
+    u = None
+
+    while not u:
+
+        if M and a:
+            u = M*a
+
+        elif M and not a and T:
+            u = M*(gamma*R*T)**0.5
+
+        elif M and not T and p and rho:
+            u = M*(gamma*p/rho)**0.5
+
+    print(f'Fluid velocity = {u}')
+    return u
+
 def get_mach_number(u=None,a=None,gamma=1.4,R=287,p=None,rho=None,T=None):
 
     M = None
@@ -143,7 +161,7 @@ def get_static_pressure(M=None,u=None,gamma=1.4,R=287,rho_static=None,T_static=N
         elif p_total and rho_static and rho_total:
             p_static = p_total/(rho_total/rho_static)**gamma
 
-        elif p_total and (u is 0):
+        elif p_total and (u == 0):
             p_static = p_total
 
     print(f'Static pressure is {p_static}')
@@ -176,7 +194,7 @@ def get_total_pressure(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=No
         elif p_static and rho_static and rho_total:
             p_total = p_static*(rho_total/rho_static)**gamma     
 
-        elif p_static and (u is 0):
+        elif p_static and (u == 0):
             p_total = p_static
     
     print(f'Total pressure = {p_total}')
@@ -192,7 +210,7 @@ def get_pressure_ratio(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=No
             p_ratio = (1 + (gamma-1) / 2 * M**2)**(gamma/(gamma-1))
 
         elif p_static and p_total:
-            p_ratio = p_total/_static
+            p_ratio = p_total/p_static
 
         elif rho_ratio:
             p_ratio = rho_ratio**(gamma)
@@ -200,8 +218,8 @@ def get_pressure_ratio(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=No
         elif T_ratio:
             p_ratio = T_ratio**(gamma/(gamma-1))
 
-    print(f'Temperature ratio = {T_ratio}')
-    return T_ratio
+    print(f'Pressure ratio = {p_ratio}')
+    return p_ratio
 
 def get_static_temperature(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=None,p_total=None,rho_total=None,T_total=None,p_ratio=None,rho_ratio=None,T_ratio=None):
 
@@ -230,7 +248,7 @@ def get_static_temperature(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_stati
         elif rho_static and rho_total and T_total:
             T_static = T_total/(rho_total/rho_static)**(1/(gamma-1))
 
-        elif T_total and (u is 0):
+        elif T_total and (u == 0):
             T_static = T_total
 
     print(f'Static temperature = {T_static}')
@@ -263,7 +281,7 @@ def get_total_temperature(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static
         elif rho_static and rho_total and T_static:
             T_total = T_static*(rho_total/rho_ratio)**(1/(gamma-1))
 
-        elif T_static and (u is 0):
+        elif T_static and (u == 0):
             T_total = T_static
 
     print(f'Total temperature = {T_total}')
@@ -317,7 +335,7 @@ def get_static_density(M=None,u=None,gamma=1.4,R=287,p_static=None,T_static=None
         elif T_static and T_total and rho_total:
             rho_static = rho_total/(T_total/T_static)**(1/(gamma-1))
 
-        elif rho_total and (u is 0):
+        elif rho_total and (u == 0):
             rho_static = rho_total
 
     print(f'Static density = {rho_static}')
@@ -349,7 +367,7 @@ def get_total_density(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=Non
         elif T_static and T_total and rho_static:
             rho_total = rho_static*(T_total/T_static)**(1/(gamma-1))
 
-        elif rho_static and (u is 0):
+        elif rho_static and (u == 0):
             rho_total = rho_static
 
     print(f'Total density = {rho_total}')
@@ -376,32 +394,32 @@ def get_density_ratio(M=None,u=None,gamma=1.4,R=287,p_static=None,rho_static=Non
     print(f'Density ratio = {rho_ratio}')
     return rho_ratio
 
-
-def build_fluid():
+'''
+def build_fluid(self):
 
     """
     Initialize fluid static properties
     """
     if p_static and T_static:
-        rho_static = get_static_density(p_static=p_static,T_static=T_static)
+        rho_static = get_static_density(self)
 
     elif rho_static and T_static:
-        p_static = get_static_pressure(rho_static=rho_static,T_static=T_static)
+        p_static = get_static_pressure(self)
 
     elif rho_static and p_static:
-        T_static = get_static_temperature(rho_static=rho_static,p_static=p_static)       
+        T_static = get_static_temperature(self)       
 
     """
     Calculate sonic velocity if not given
     """
     if not a:
-        a = get_sonic_velocity(T=T_static)
+        a = get_sonic_velocity(self)
 
     """
     Calculate Mach number if not given
     """
     if not M:
-        M = get_mach_number(u=u,a=a)
+        M = get_mach_number(self)
 
     """
     Calculate total properties if not given
@@ -419,15 +437,15 @@ def build_fluid():
     Calculate ratios if not given
     """
     if not p_ratio:
-        p_ratio = p_total/p_static
+        p_ratio = get_pressure_ratio(self)
     
     if not T_ratio:
-        T_ratio = T_total/T_static
+        T_ratio = get_temperature_ratio(self)
 
     if not rho_ratio:
-        rho_ratio = rho_total/rho_static
+        rho_ratio = get_density_ratio(self)
 
-    pass
+'''
 
 if __name__ == '__main__':
     mach = get_mach_number(u=100,a=300)
