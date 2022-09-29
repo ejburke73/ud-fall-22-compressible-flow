@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Fully calculates post normal shock state given Mach and gamma
 # Ratios can be calculated without conditions
 # Post shock conditions require pre shock conditions
@@ -43,10 +41,10 @@ class NormalShock:
         self.sonic_area_ratio = get_sonic_area_ratio_normal_shock(p2_t_p1_t=self.p2_t_p1_t)
         self.p2_t_p1 = get_p2_total_over_p1_static_normal_shock(M2=self.M2,gamma=self.gamma,p2_p1=self.p2_p1)
 
-class ObliqueShock:
+'''class ObliqueShock:
 
     def __init__(self):
-        pass
+        pass'''
 
 def get_mach_normal_shock(M1=None,gamma=1.4):
     M2 = ((1 + (gamma-1)/2 * M1**2) / (gamma * M1**2 - (gamma-1)/2))**0.5
