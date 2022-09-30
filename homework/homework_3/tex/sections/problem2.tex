@@ -23,6 +23,8 @@ All flow is isentropically brought to rest at the tip of the pitot-probe.
 
 \solution{}
 
+\textit{Note: All calculations performed in Python using custom module designed to analyze isentropic flow and normal shocks. See appendices.}
+
 During the subsonic portion of flight, the F-16's Mach number is found using isentropic equations relating \(p_t,\, p, \,\textrm{and} \, M\).
 
 \[
@@ -164,7 +166,7 @@ Figure \ref{P_ratio} shows the time history of the pitot-probe's total to static
     \label{P_ratio}
 \end{figure}
 
-Figure~\ref{MvsT_correct} shows the F-16's Mach number over the time of its flight using the relationships we have defined.
+Figure~\ref{MvsT_correct} shows the F-16's Mach number (Mach in region 1) over the time of its flight using the relationships we have defined.
 
 \begin{figure}[h]
     \centering
@@ -182,23 +184,23 @@ Figure \ref{MvsT_shockfree} shows a comparison of the F-16's Mach number calcula
     \label{MvsT_shockfree}
 \end{figure}
 
-Figure \ref{MvsT_probe} shows the Mach number experienced by the pitot probe during the flight.
+Figure \ref{MvsT_probe} shows the Mach number in region 2, which is immediately after the normal shock during supersonic flight.
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16_Probe.png}
-    \caption{Mach experienced by pitot probe vs. Time during flight}
+    \caption{Mach in region 2, upstream of pitot probe vs. Time during flight}
     \label{MvsT_probe}
 \end{figure}
 
-Figure \ref{MvsT_probe_aircraft} shows a comparison of the F-16's flight Mach number and that of the pitot probe in-flight.
-Note that the pitot probe experiences a local minimum Mach number when the F-16 is flying at its largest Mach number.
+Figure \ref{MvsT_probe_aircraft} shows a comparison of the F-16's flight Mach number in region 1 and that of the post-shock flow in region 2.
+Note that the region just upstream of the pitot probe experiences a local minimum Mach number when the F-16 is flying at its largest Mach number.
 This is indicative of the fact that shock strength increases with incoming Mach number.
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16_Probe_Aircraft.png}
-    \caption{Mach experienced by pitot probe and F-16 vs. Time during flight}
+    \caption{Mach vs Time of flow in regions 1 (pre-shock/vehicle Mach) and 2 (post shock/before pitot) vs. Time during flight}
     \label{MvsT_probe_aircraft}
 \end{figure}
 
@@ -224,6 +226,39 @@ All flow is isentropically brought to rest at the tip of the pitot-probe. Total 
 
 \solution{}
 
+\textit{Note: All calculations performed in Python using custom module designed to analyze isentropic flow and normal shocks. See appendices.}
 
+Given a constant freestream air temperature of \(T_\infty = 298 K\) and the previously calculated vehicle Mach number, we can determine the total temperature experienced by the F-16 over the duration of its flight using the following isentropic relationship:
+
+\[
+    \frac{T_{t,1}}{T_1} = 1 + \frac{\gamma-1}{2} M_1^2
+\]
+
+\[
+   T_{t,1} = 298 \, [K]* \left({1 + \frac{\gamma-1}{2} M_1^2}\right)
+\]
+
+We know that shocks are adiabatic and therefore total temperature across a shock is constant.
+
+\[
+    T_{t,1} = T_{t,2}
+\]
+
+Because we are assuming that the tip of the probe is a stagnation point \((M=0)\), total temperature is equal to static temperature for the probe.
+
+\[
+    T_{t,2} = T_{t,probe} = T_{probe}
+\]
+
+Figure \ref{Probe_temp} shows the time history of temperature experienced at the tip of the pitot probe.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Probe_T_t_vs_Time_F16.png}
+    \caption{Pitot Probe Total Temperature vs. Time}
+    \label{Probe_temp}
+\end{figure}
+
+These temperatures are safely below the melting point of aluminum.
 
 \end{document}
