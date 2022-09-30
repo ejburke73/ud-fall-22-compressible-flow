@@ -1,0 +1,229 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\problem{2}
+
+\problempart{a} Plot the Mach number of the F-16 during its 20-minute flight.
+
+\givens{}
+
+Time series for \(p_t\) and \(p\), the total and static pressure, respectively, measured by the F-16's pitot-probe.
+The flight data given covers a simple trajectory including a take-off, acceleration to max-speed, and deceleration to landing.
+
+\assumptions{}
+
+Let region 1 be the area upstream of the bow shock.
+Let region 2 be the area \textit{immediately behind the shock} but not at the probe's stagnation point.
+The static pressure measurement taken by the probe is valid for the static pressure \textit{upstream} of the shock.
+The flow before and after the bow shock is isentropic, calorically perfect air. \(\gamma_{air} = 1.4, R_{air} = 287 \, \unit{\joule/\kilogram\cdot\kelvin}\).
+The shock can be evaluated as a normal shock in front of the pitot probe.
+A shock is only present in front of the pitot probe when the F-16 is traveling supersonically, \(M > 1\).
+All flow is isentropically brought to rest at the tip of the pitot-probe.
+
+\solution{}
+
+During the subsonic portion of flight, the F-16's Mach number is found using isentropic equations relating \(p_t,\, p, \,\textrm{and} \, M\).
+
+\[
+    \frac{p_{t,1}}{p_1} = {\left({1 + \frac{\gamma-1}{2}M_1^2}\right)}^{\frac{\gamma}{\gamma-1}}
+\]
+
+Rearranging to isolate \(M\):
+
+\[
+    M_1 = \sqrt{
+        \left[{{\left({\frac{p_{t,1}}{p_1}}\right)}^{\frac{\gamma-1}{\gamma}} - 1}\right]
+        \frac{2}{\gamma-1}
+    }
+\]
+
+During the subsonic portion of flight, we have data for the quantities \(p_{t,1} \, \textrm{and} \, p_1 \), and can easily solve for \(M_1\).
+However, once the F-16 reaches supersonic velocities, this relation is no longer valid for our measurements. 
+The total pressure measurement becomes the total pressure experienced by the probe \textit{behind the shock}, \(p_{t,2}\).
+We must now find a new relationship using \(p_{t,2} \, , \, p_1 , \, \textrm{and} \, M_2\).
+The ratio of total pressure behind a shock to static pressure in front of a shock can be expressed via the multiplication of other ratios we have isentropic/normal shock relations for.
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    \frac{p_{t,2}}{p_2}
+    \frac{p_2}{p_1}
+\]
+
+The isentropic relationship for total and static pressure has already been shown for the subsonic Mach caculations.
+
+\[
+    \frac{p_{t,2}}{p_2} = 
+    {\left({1 + \frac{\gamma-1}{2}M_2^2}\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+\]
+
+The relationship connecting static pressure across a normal shock is given below:
+
+\[
+    \frac{p_2}{p_1} = 
+    \left({
+    \frac{2 \gamma}{\gamma+1} M_1^2 -
+    \frac{\gamma-1}{\gamma+1}
+    }\right)
+\]
+
+Combining these two equations yields an expression for \(p_{t,2}/p_1\) in terms of \(\gamma\), \(M_1\), and \(M_2\).
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    {\left({1 + \frac{\gamma-1}{2}M_2^2}\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+    \left({
+    \frac{2 \gamma}{\gamma+1} M_1^2 -
+    \frac{\gamma-1}{\gamma+1}
+    }\right)
+\]
+
+We do not know \(M_1\) or \(M_2\), but we do have a normal shock relationship relating the two of them:
+
+\[
+    M_2^2
+    =
+    \frac{M_1^2 + \frac{2}{\gamma-1}}{\frac{2\gamma}{\gamma-1}M_1^2-1}
+\]
+
+Substituting this relation into our previous defined ratio:
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    {\left({1 + \frac{\gamma-1}{2} {\left[{\frac{M_1^2 + \frac{2}{\gamma-1}}{\frac{2\gamma}{\gamma-1}M_1^2-1}}\right]} }\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+    \left({
+    \frac{2 \gamma}{\gamma+1} M_1^2 -
+    \frac{\gamma-1}{\gamma+1}
+    }\right)
+\]
+
+This equation cannot be solved by hand, so a numerical solver will be used in Python to determine the Mach number based on \(p_{t,2}/p_1\) while the F-16 is supersonic.
+The final question that must be examined before calculating the F-16's Mach number during its flight is how to decide whether the F-16 is subsonic or supersonic without knowing the Mach number.
+The answer comes by examining the limiting case of exactly sonic velocity, i.e. \(M=1\).
+The isentropic total-to-static pressure ratio for \(M=1\) is given below, where \(p^*\) represents static pressure at sonic conditions.
+
+\[
+    \frac{p_{t}}{p^*} = 
+    {\left({1 + \frac{\gamma-1}{2}}\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+\]
+
+Inserting our known value of \(\gamma\) yields the critical pressure ratio for sonic flight:
+
+\[
+    \frac{p_{t}}{p^*} \approx 1.89
+\]
+
+From this value we can determine when the F-16 reaches sonic velocities.
+By definition, a normal shock at sonic conditions is an infinitely weak shock and is isentropic.
+Examining the relationship for \(p_{t,2}/p^*\) at sonic conditions:
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    {\left({1 + \frac{\gamma-1}{2} {\left[{\frac{1 + \frac{2}{\gamma-1}}{\frac{2\gamma}{\gamma-1}-1}}\right]} }\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+    \left({
+    \frac{2 \gamma}{\gamma+1}  -
+    \frac{\gamma-1}{\gamma+1}
+    }\right)
+\]
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    {\left({1 + \frac{\gamma-1}{2} \cancelto{1}{\left[{\frac{\gamma  + 1}{\gamma  + 1}}\right]} }\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+    \left({
+    \cancelto{1}{\frac{\gamma+1}{\gamma+1}}
+    }\right)
+\]
+
+\[
+    \frac{p_{t,2}}{p_1} = 
+    {\left({1 + \frac{\gamma-1}{2}}\right)}
+    ^{\frac{\gamma}{\gamma-1}}
+\]
+
+\[
+    \frac{p_{t,2}}{p_1} \approx 1.89
+\]
+
+We have now proven that both the subsonic and supersonic relationships we have found converge onto the same value at the sonic condition.
+Any time the pressure ratio from the pitot-probe exceeds this critical value, the F-16 is supersonic, and any time it is below, it is subsonic.
+
+\discussion{}
+
+Figure \ref{P_ratio} shows the time history of the pitot-probe's total to static pressure ratio, highlighting the critical threshold beyond which flight is supersonic.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Probe_P_ratio_vs_Time_F16.png}
+    \caption{Probe total-to-static pressure ratio and supersonic threshold}
+    \label{P_ratio}
+\end{figure}
+
+Figure~\ref{MvsT_correct} shows the F-16's Mach number over the time of its flight using the relationships we have defined.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16.png}
+    \caption{F-16 Mach vs. Time during flight, calculated using isentropic and normal shock relations}
+    \label{MvsT_correct}
+\end{figure}
+
+Figure \ref{MvsT_shockfree} shows a comparison of the F-16's Mach number calculated correctly, taking shocks into account, and calculated as if there were no shocks in front of the probe.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16_Piecewise_Simple.png}
+    \caption{F-16 Mach vs. Time during flight, calculated correctly and as if there were no shocks}
+    \label{MvsT_shockfree}
+\end{figure}
+
+Figure \ref{MvsT_probe} shows the Mach number experienced by the pitot probe during the flight.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16_Probe.png}
+    \caption{Mach experienced by pitot probe vs. Time during flight}
+    \label{MvsT_probe}
+\end{figure}
+
+Figure \ref{MvsT_probe_aircraft} shows a comparison of the F-16's flight Mach number and that of the pitot probe in-flight.
+Note that the pitot probe experiences a local minimum Mach number when the F-16 is flying at its largest Mach number.
+This is indicative of the fact that shock strength increases with incoming Mach number.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{../images/problem_2/Mach_vs_Time_F16_Probe_Aircraft.png}
+    \caption{Mach experienced by pitot probe and F-16 vs. Time during flight}
+    \label{MvsT_probe_aircraft}
+\end{figure}
+
+\clearpage
+
+\problempart{b} Plot the air temperature experienced at the tip of the probe for this 20-minute flight.
+
+\givens{}
+
+Time series for \(p_t\) and \(p\), the total and static pressure, respectively, measured by the F-16's pitot-probe.
+The flight data given covers a simple trajectory including a take-off, acceleration to max-speed, and deceleration to landing.
+There is a constant atmospheric temperature of \(T=298\,K\) at all altitudes in the trajectory.
+
+\assumptions{}
+
+Let region 1 be the area upstream of the bow shock.
+Let region 2 be the area \textit{immediately behind the shock} but not at the probe's stagnation point.
+The static pressure measurement taken by the probe is valid for the static pressure \textit{upstream} of the shock.
+The flow before and after the bow shock is isentropic, calorically perfect air. \(\gamma_{air} = 1.4, R_{air} = 287 \, \unit{\joule/\kilogram\cdot\kelvin}\).
+The shock can be evaluated as a normal shock in front of the pitot probe.
+A shock is only present in front of the pitot probe when the F-16 is traveling supersonically, \(M > 1\).
+All flow is isentropically brought to rest at the tip of the pitot-probe. Total temperature is constant across a shock because shocks are adiabatic.
+
+\solution{}
+
+
+
+\end{document}
