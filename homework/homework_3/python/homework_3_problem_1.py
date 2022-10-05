@@ -18,10 +18,28 @@ traj_dict = {'time' : 0, 'h' : 1, 'u' : 2, 'T' : 3, 'p' : 4, 'rho' : 5}
 
 
 # Part A
-mach_isen = [isen.get_mach_number(u=u,T=T,p=p) for u, T, p in zip (trajectory[:,traj_dict['u']],trajectory[:,traj_dict['T']],trajectory[:,traj_dict['p']])]
+mach_isen = [isen.get_mach_number(u=u,T=T) for u, T in zip (trajectory[:,traj_dict['u']],trajectory[:,traj_dict['T']])]
 mach_roomtemp = [isen.get_mach_number(u=u,T=298,p=p) for u,p in zip(trajectory[:,traj_dict['u']],trajectory[:,traj_dict['p']])]
 mach_diff = [abs(Mi-Mr) for Mi,Mr in zip(mach_isen,mach_roomtemp)]
 percent_diff = [diff/mi*100 for diff,mi in zip(mach_diff,mach_isen)]
+
+fig, ax = plt.subplots()
+plt.plot(trajectory[:,traj_dict['time']],mach_isen, label = 'Isentropic Mach')
+ax.set_xlabel('Time [s]')
+ax.set_ylabel('Mach')
+ax.set_title('Mach vs. Time')
+ax.legend()
+plt.savefig('../images/problem_1/Mach_correct_vs_Time.png')
+plt.close()
+
+fig, ax = plt.subplots()
+plt.plot(trajectory[:,traj_dict['time']],mach_roomtemp, label = 'Room Temp Mach')
+ax.set_xlabel('Time [s]')
+ax.set_ylabel('Mach')
+ax.set_title('Mach vs. Time')
+ax.legend()
+plt.savefig('../images/problem_1/Mach_298_vs_Time.png')
+plt.close()
 
 fig, ax = plt.subplots()
 plt.plot(trajectory[:,traj_dict['time']],mach_isen, label = 'Isentropic Mach')
@@ -83,12 +101,13 @@ plt.close()
 
 fig,ax1 = plt.subplots()
 ax2 = ax1.twinx()
-ax1.plot(trajectory[:,traj_dict['time']],rho_rho_t)
-ax2.plot(trajectory[:,traj_dict['time']],mach_isen,'r')
+ax1.plot(trajectory[:,traj_dict['time']],rho_rho_t,label='Density Ratio')
+ax2.plot(trajectory[:,traj_dict['time']],mach_isen,'r',label='Freestream Mach')
 ax1.set_xlabel('Time [s]')
 ax1.set_ylabel(r'$\frac{\rho_\infty}{\rho_0}$', fontsize=18)
 ax2.set_ylabel('Mach')
 ax1.set_title(r'$\frac{\rho_\infty}{\rho_0}$ vs Time')
+fig.legend()
 plt.savefig('../images/problem_1/rho_rho_t_and_Mach_vs_Time.png')
 #plt.close()
 ax1.plot(closest_time_095,closest_rho_ratio_095,'kd')
