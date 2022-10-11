@@ -16,7 +16,6 @@ trajectory = trajectory.to_numpy()
 
 traj_dict = {'time' : 0, 'h' : 1, 'u' : 2, 'T' : 3, 'p' : 4, 'rho' : 5}
 
-
 # Part A
 mach_isen = [isen.get_mach_number(u=u,T=T) for u, T in zip (trajectory[:,traj_dict['u']],trajectory[:,traj_dict['T']])]
 mach_roomtemp = [isen.get_mach_number(u=u,T=298,p=p) for u,p in zip(trajectory[:,traj_dict['u']],trajectory[:,traj_dict['p']])]
@@ -153,18 +152,11 @@ print(f'Closest time to Mach 6 = {closest_time_M6}')
 closest_u_M6 = trajectory[idx_M6,traj_dict['u']]
 print(f'Closest freestream velocity to Mach 6 = {closest_u_M6}')
 closest_T_M6 = trajectory[idx_M6,traj_dict['T']]
+print(f'Closest freestream temp to Mach 6 = {closest_T_M6}')
 T_t_M6 = isen.get_total_temperature(M=closest_mach_M6,T=closest_T_M6)
 T_t_T_M6 = isen.get_temperature_ratio(M=closest_mach_M6)
 
-# This does not seem like a feasible temperature for the blankets to generate
-
 # If this were achievable, the static temperature in the nozzle throat:
 T_sonic_blanket = isen.get_static_temperature(M=1,T_t=T_t_M6)
+print(f'Sonic throat temp = {T_sonic_blanket}')
 
-# Part D
-# Assuming matching M and u in the tunnel
-# Assuming same size vehicle
-# Assuming same Reynolds number
-# Are surface temps the same?
-
-# I think so

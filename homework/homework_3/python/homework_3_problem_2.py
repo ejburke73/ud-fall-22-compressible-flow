@@ -33,7 +33,6 @@ p1 = trajectory[:,2]
 # Any ratio of p_t_probe/p1 = 1.89 = exactly sonic
 # Any ratio of p_t_probe/p1 > 1.89 = subsonic --> Mach # calculated here NOT valid
 
-# Must use:
 # For supersonic cases:
 
 # p2t/p1 =p2t/p2*p2/p1 
@@ -41,18 +40,10 @@ p1 = trajectory[:,2]
 # p2t/p2 = (1 + (gamma-1) / 2 * M2**2)**(gamma/(gamma-1)) 
 # p2_p1 = (1 + 2*gamma/(gamma+1)*(M1**2-1))
 # M2**2 = ((1 + (gamma-1)/2 * M1**2) / (gamma * M1**2 - (gamma-1)/2))
-
-# p2t/p1 = (1 + (gamma-1) / 2 * M2**2)**(gamma/(gamma-1)) * (1 + 2*gamma/(gamma+1)*(M1**2-1))
 # p2t/p1 = (1 + (gamma-1) / 2 * ((1 + (gamma-1)/2 * M1**2) / (gamma * M1**2 - (gamma-1)/2)))**(gamma/(gamma-1)) * (1 + 2*gamma/(gamma+1)*(M1**2-1))
 # Must be iteratively solved for M1
 
 # p2t/p1 (M1=1) = 1.89
-
-# Vehicle mach number must be calculated in piecewise fashion
-# Generate list of pressure ratios
-# All values < 1.89 -> p1_t/p1
-# All values > 1.89 -> p2_t/p1
-# All values < 1.89 -> p1_t/p1
 
 ratios = [p_t/p for p_t,p in zip(p_t_probe,p1)]
 sonic_ratios = isen.get_sonic_ratios()
@@ -86,15 +77,13 @@ ax.legend()
 plt.savefig('../images/problem_2/Probe_P_ratio_vs_Time_F16.png')
 plt.close()
 
-# Part b
-
+# Part 
 # Mach # experienced by probe = subsonic entire time
 # Piecewise built up from aircraft Mach # when subsonic and post-normal shock Mach # when aircraft is supersonic
 
 mach_near_probe = [M1 if M1 < 1 else shocks.get_mach_normal_shock(M1) for M1 in machs] # this is actually the mach number immediately behind the shock but not the probe because probe is stagnant
 
 # Probe will experience same static temp as temp behind shock
-# Probe will experience same total temp as temp behind shock..??? Shouldn't the static temp just be the total temp for the probe????
 
 fig,ax = plt.subplots()
 plt.plot(time,mach_near_probe,label='In Front of Probe')
