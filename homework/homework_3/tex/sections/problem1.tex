@@ -100,6 +100,7 @@ Isentropic flow.
 \(\gamma_{air} = 1.4\). 
 \(R_{air} = 287 \, \unit{\joule/\kilogram\cdot\kelvin}\). 
 The flow around the vehicle can be treated as inviscid.
+A flow is compressible when \(\rho_\infty/\rho_0\) \(\le 0.95\%\). 
 
 \solution{}
 
@@ -112,8 +113,10 @@ The isentropic flow relation for total-to-static density is given by:
 Obtaining \(\rho_\infty/\rho_0\) involves a simple reciprocal.
 Figure \ref{rho_rho_t_time} shows the time history of the static to total density ratio, \(\rho_\infty/\rho_0\) versus time.
 There is a rapid reduction in the ratio indicating that compressibility comes into play quickly. 
+Assuming isentropic flow, \(\rho_0\) and \(\rho_\infty\) are only exactly equal for \(M_\infty=0\).
+
 Figure \ref{rho_rho_t_vs_Mach} shows the relationship between the density ratio and Mach number.
-The freestream density has been reduced by ~25\% by the time the sonic condition is reached.
+The freestream density has been reduced by~25\% by the time the sonic condition is reached.
 Figure \ref{rho_rho_t_vs_Mach_marked} compares the density ratio and Mach number both as a function of time, highlighting the exact point in time and Mach number where the fluid's density has changed by 5\%, our accepted definition of compressibility.
 The marked points indicate that at \(M_\infty = 0.31\) and \(t=1 \, \unit{\s}\), there is a 5\% reduction in static density relative to total density.
 The flow becomes compressible almost immediately in the trajectory, and we must use appropriate compressible relations to account for that through the entirety of the time history.
@@ -135,7 +138,7 @@ The flow becomes compressible almost immediately in the trajectory, and we must 
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=.7]{../../images/problem_1/rho_rho_t_and_Mach_vs_Time_marked.png}
-    \caption{Density ratio and Mach vs.s time}
+    \caption{Density ratio and Mach vs. time, compressible point marked}
     \label{rho_rho_t_vs_Mach_marked}
 \end{figure}
 
