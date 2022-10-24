@@ -3,7 +3,6 @@
 # Homework 4 - Problem 1
 # Evan Burke
 
-from cProfile import label
 import numpy as np
 from matplotlib import pyplot as plt
 import shocks as ns
