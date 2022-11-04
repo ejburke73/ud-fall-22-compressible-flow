@@ -3,7 +3,6 @@
 # Homework 4 - Problem 2
 # Evan Burke
 
-from gettext import find
 import numpy as np
 from matplotlib import pyplot as plt
 import shocks as ns
@@ -134,19 +133,19 @@ if __name__=='__main__':
     pt3_pt1s = [ramjets.pt3_pt1 for ramjets in ramjets_mach]
 
     fig,ax = plt.subplots()
-    ax.set_title("Inlet Total Pressure Ratio vs. Cruise Mach")
+    ax.set_title("Inlet Total Pressure Ratio (pt3/pt1) vs. Cruise Mach")
     ax.set_xlabel('Cruise Mach')
     ax.set_ylabel('Inlet Total Pressure Ratio')
     plt.plot(machs,pt3_pt1s,'-')
     plt.savefig('../images/problem_2/tpr_vs_mach.png')
 
-    p3_p1s = [1/ramjets.p1_p3 for ramjets in ramjets_mach]
+    p1_p3s = [ramjets.p1_p3 for ramjets in ramjets_mach]
 
     fig,ax = plt.subplots()
-    ax.set_title("Inlet Static Pressure Ratio vs. Cruise Mach")
+    ax.set_title("Inlet Static Pressure Ratio (p1/p3) vs. Cruise Mach")
     ax.set_xlabel('Cruise Mach')
     ax.set_ylabel('Inlet Static Pressure Ratio')
-    plt.plot(machs,p3_p1s,'-')
+    plt.plot(machs,p1_p3s,'-')
     plt.savefig('../images/problem_2/pr_vs_mach.png')
 
     T3s = [ramjets.T3 for ramjets in ramjets_mach]

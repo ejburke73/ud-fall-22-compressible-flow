@@ -111,11 +111,13 @@ In addition, sketch the more realistic shape of the shock.
 \discussion{}
 
 Inclusion of viscous effects changes the way that shocks propogate throughout a flowpath.
-Because of the non-slip condition with \(u_{wall}=0\), the shock strength required to turn the flow near the wall is smaller and therefore the shock angle \(\beta\) near the wall is also smaller.
+Because of the non-slip condition with \(u_{wall}=0\), there is a region in the boundary layer where the flow velocity is subsonic.
+Below the sonic line that separates subsonic and supersonic flow, there is no shock wave.
+Above the sonic line, but still inside the boundary layer, the Mach number is smaller than the freestream value and therefore the shock angle \(\beta\) is larger than the freestream value.
 Figure \ref{y_vs_beta} shows a qualitative sketch of the \(y\) vs. \(\beta\) distribution from the bottom surface of the inlet to the top along the reflected oblique shock.
-Similar to the velocity profile, \(\beta\) begins at 0 and increases until the freestream value of \(\beta\) is reached at a height off of the wall of \(\delta\).
-The shock angle is constant with freestream velocity until a height of \(H-\delta\) where the upper surface boundary layer begins to influence the flow.
-The shock angle then decreses back to a value of 0 at the upper wall.
+Note that there is no \(\beta\) very near the wall as the flow cannot generate a shock.
+Above the boundary layer height, denoted by \(\delta\), the shock angle is constant with freestream velocity until a height of \(H-\delta\) where the upper surface boundary layer begins to influence the flow.
+The shock angle then decreases until the flow is once again subsonic and there is no shock in the boundary layer.
 
 \begin{figure}[h!]
     \centering
@@ -125,9 +127,13 @@ The shock angle then decreses back to a value of 0 at the upper wall.
 \end{figure}
 
 Figure \ref{viscous_inlet} shows a sketch of the scramjet inlet region with both reflected shocks and viscous effects included.
-Using knowledge from figure \ref{y_vs_beta} allows us to sketch what happens to the shock in the region near the wall in the viscous boundary layer.
-The shock is concave on the bottom surface until a height of \(\delta\) and convex on the top surface from \(H-\delta\) to \(H\).
+Note the sonic line in orange, representing the delineation between the flow regimes, where there is no shock in the subsonic region.
+The incident shock travels at an angle \(\beta_1\) just inside the leading edge of the bottom surface of the inlet where we are assuming there is a small but extant boundary layer with a subsonic region.
+The incident shock does not travel through the subsonic region, but reflects at an angle \(\beta_2\) up to the top surface of the inlet.
+Using knowledge from figure \ref{y_vs_beta} allows us to sketch what happens to the shock in the region near the wall above the sonic line in the boundary layer.
+The shock is concave on the bottom surface until a height of \(\delta\) and convex on the top surface from \(H-\delta\) to near \(H\).
 The finer details of the shockwave-boundary layer interactions are neglected here but the high-level qualities of the boundary layer's impact on the shockwave are represented qualitatively.
+
 
  
 \begin{figure}[h!]
