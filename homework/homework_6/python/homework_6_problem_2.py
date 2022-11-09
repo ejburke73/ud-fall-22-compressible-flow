@@ -15,16 +15,23 @@ Tt = 500 # K
 Me = 6 # Design exit Mach
 D_th = 4.114 # throat diameter, inviscid, inches
 D_th_r = 3.71 # throat diameter, real, viscous, inches
+R = 287
+gamma = 1.4
 
 # Convert diameters to meters
 D_th = D_th * 0.0254
-D_th_r = D_th_r * D_th_r
+D_th_r = D_th_r * 0.0254
+
+print(f'Throat Diameter (Inviscid) = {D_th}')
+print(f'Throat Diameter (Viscous) = {D_th_r}')
 
 A_th = np.pi * D_th**2/4
+print(f'A* = {A_th}')
 
 def mass_flow(pt=None, A_star=None, Tt=None, gamma=1.4, R=287):
-    mdot = pt*A_star / Tt**0.5 * (gamma/R * (2/gamma+1)**((gamma+1)/(gamma-1)))**0.5
+    mdot = pt*A_star / Tt**0.5 * (gamma/R * (2/(gamma+1))**((gamma+1)/(gamma-1)))**0.5
     print(f'Choked Mass Flow Rate = {mdot} kg/s')
+    return mdot
 
 def A_from_A_star(A_star=None,M=None,gamma=1.4):
     A = ((A_star**2/M**2) * (2/(gamma+1) * (1 + (gamma-1)/2 * M**2 ))**((gamma+1)/(gamma-1)))**0.5
@@ -84,5 +91,26 @@ p_avg = isen.get_static_pressure(M=M_avg,p_t=pt)
 p_avg_NS = ns.get_static_pressure_normal_shock(M1=M_avg,p1=p_avg)
 
 # Part J
+T_tank = 295 
+tank_vol = 4000 # gal
+tank_vol = tank_vol * 0.00378541 # m^3
+
+ts = np.linspace(0,300,num=301,endpoint=True)
+pbs = [mdot/tank_vol*t*R*T_tank for t in ts]
+
+t_NS = p_exit_ns * tank_vol / (mdot * R * T_tank)
+print(f'Time to fill receiving tanks to yield exit NS = {t_NS}')
 
 # Part K
+mass_used =mdot*t_NS
+print(f'Mass used until NS = {mass_used}')
+rho_tube = isen.get_static_density(p=pt,T=Tt)
+D_driver = 9.75
+D_driver = 0.24765
+A_driver = np.pi*D_driver**2/4
+volume_used = mass_used/rho_tube
+L_used = mass_used/(rho_tube*A_driver)
+
+print(f'Volume used = {volume_used}')
+print(f'Driver Tube cross sectional area = {A_driver}')
+print(f'Length used = {L_used} m = {L_used*3.28084} ft')

@@ -1,0 +1,43 @@
+\documentclass[12pt,letterpaper]{article}
+
+\setcounter{secnumdepth}{2}
+
+\usepackage{preamble}
+
+\iffalse
+\usepackage{draftwatermark}
+\SetWatermarkAngle{45}
+\SetWatermarkScale{1.75}
+\SetWatermarkColor{red!15}
+\SetWatermarkFontSize{42pt}
+\SetWatermarkText{\shortstack{\bfseries\sffamily DRAFT! \\ [1em] \bfseries\sffamily DRAFT! \\ [1em ]\bfseries\sffamily DRAFT! }}
+\fi
+
+% Edit these as appropriate
+\author{Evan Burke}
+\newcommand\assignmentname{Homework 6}
+\title{\assignmentname{}}
+\newcommand\coursenumber{AEE 553}
+\newcommand\coursename{Compressible Flow}
+\newcommand\instructor{Dr. Carson Running}
+\newcommand\studentID{101318838}   
+     
+\begin{document}
+
+	\graphicspath{{images}{../images/problem_1}{../images/problem_2}{../images/problem_3}}
+
+	\input{title.tex}
+	
+	\tableofcontents
+	
+	%\newpage \subfile{sections/nomenclature}
+	
+    \newpage \subfile{sections/problem1}
+
+	\clearpage \subfile{sections/problem2}
+
+	%\clearpage \subfile{sections/problem3}
+
+	\clearpage \subfile{sections/appendix}
+		
+\end{document}
