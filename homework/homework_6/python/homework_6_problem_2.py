@@ -43,6 +43,9 @@ mdot = mass_flow(pt=pt, A_star=A_th, Tt=Tt, gamma=1.4, R=287)
 
 # Part B
 A_exit = A_from_A_star(A_star=A_th,M=Me,gamma=1.4)
+print('\n\n')
+print(A_exit/A_th)
+print('\n\n')
 
 # Part C
 p_exit = isen.get_static_pressure(M=Me,p_t=pt)

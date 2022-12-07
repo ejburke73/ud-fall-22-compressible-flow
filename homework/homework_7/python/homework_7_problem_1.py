@@ -1,6 +1,6 @@
 # Compressible Flow
 # AEE 553
-# Homework 6 - Problem 2
+# Homework 7 - Problem 1
 # Evan Burke
 
 import numpy as np
@@ -9,92 +9,70 @@ import shocks as ns
 import oblique as os
 import isentropic as isen
 from scipy.optimize import fsolve
-
-pt = 20.408 * 10**6 # MPa to Pa
-T_i = 3600 # static temp at inlet of CD nozzle, K
-A_i = 0.21 # area at inlet of CD nozzle, m^2
-A_th = 0.054 # area at throat of CD nozzle, m^2
-A_e = 4.17 # area at exit of CD nozzle, m^2
+from scipy.optimize import root
+gamma = 1.4
 R = 287
-gamma = 1.2 # this is different!!!
+d_tube = 9.75 # in
+l_tube = 82 # ft
+d_nozzle = 9.75 # in
+l_nozzle = 117 # in
+p0 = 4000000 # pa
+T0 = 500 # K
+Tb = 295 # K
+pb = 2533.45 # Pa, from HW6
+a1 = isen.get_sonic_velocity(T=Tb)
+a4 = isen.get_sonic_velocity(T=T0)
 
-def mass_flow(pt=None, A_star=None, Tt=None, gamma=1.4, R=287):
-    mdot = pt*A_star / Tt**0.5 * (gamma/R * (2/(gamma+1))**((gamma+1)/(gamma-1)))**0.5
-    print(f'Choked Mass Flow Rate = {mdot} kg/s')
-    return mdot
+# a
+def shock_tube_pressures(p2_p1=None,a1=None,a4=None,gamma=1.4):
+    p4_p1 = p2_p1 * (1 - (gamma-1)*(a1/a4)*(p2_p1-1) / (2*gamma*(2*gamma + (gamma+1)*(p2_p1-1)))**0.5)**((-2*gamma)/(gamma-1))
+    return p4_p1
 
-def A_from_A_star(A_star=None,M=None,gamma=1.4):
-    A = ((A_star**2/M**2) * (2/(gamma+1) * (1 + (gamma-1)/2 * M**2 ))**((gamma+1)/(gamma-1)))**0.5
-    print(f'Area for M = {M}: {A} m^2')
-    return A  
+p2_p1 = 17.975422520 # from MATLAB
 
-altitudes = np.linspace(0,20000,num=20001, endpoint=True)
-print(altitudes)
+T2_T1 = p2_p1 * (((gamma+1)/(gamma-1)+p2_p1) / (1 + (gamma+1)/(gamma-1)*p2_p1))
+print(f'T2/T1 = {T2_T1}')
+rho2_rho1 = ( (1 + (gamma+1)/(gamma-1)*p2_p1) / ((gamma+1)/(gamma-1)+p2_p1))
+print(f'rho2/rho1 = {rho2_rho1}')
+W = a1 * ((gamma+1)/(2*gamma) *(p2_p1-1)+1)**0.5
+print(f'W = {W}')
+up = a1/gamma * (p2_p1 -1) * (((2*gamma)/(gamma+1))/(p2_p1 + (gamma-1)/(gamma+1)))**0.5
+print(f'up = {up}')
+Ms = W/a1
+print(f'Ms = {Ms}')
 
-pressures = [101325*(1-(2.25577*10**(-5)*h))**5.25588 for h in altitudes]
-print(pressures[0:10])
+p2 = p2_p1 * pb
+print(f'p2 = {p2}')
 
-def SSME_thrust(mdot=None,u_e=None,p_e=None,p_amb=None,A_e=None):
-    thrust = mdot * u_e + (p_e-p_amb)*A_e
-    return thrust
-    
-# To get mdot:
-# Need pt, A_th, Tt, gamma, R
-# pt is given, Tt unknown, M_th = 1, A_i/A_th known
-# Solve for M_i from A_i/A_th given that M_th = 1
+T2 = T2_T1*Tb
+print(f'T2  {T2}')
 
-def A_A_star(M=None,A_A_star=None,gamma=1.4):
-    eq = ((1/M**2) * (2/(gamma+1) * (1 + (gamma-1)/2 * M**2 ))**((gamma+1)/(gamma-1)))**0.5 - A_A_star
-    return eq
+a2 = isen.get_sonic_velocity(T=T2)
+M2 = up/a2
+print(f'M2 = {M2}')
 
-M_i = float(fsolve(A_A_star,x0=0.150,args=(A_i/A_th,gamma)))
-print(f'Nozzle Inlet Mach = {M_i}')
-Tt = isen.get_total_temperature(M=M_i,T=T_i,gamma=gamma)
-print(f'Total temperature at nozzle inlet = {Tt} K')
+p2t = isen.get_total_pressure(M=M2,p=p2)
+p2t_model = ns.get_total_pressure_normal_shock(M1=M2,p1_t=p2t)
 
-mdot = mass_flow(pt=pt,A_star=A_th,Tt=Tt,gamma=gamma,R=R)
+l_nozzle = l_nozzle * 0.0254
+print(f'Nozzle length = {l_nozzle} m')
 
-# mdot, A_e, p_ambs known, need u_e and p_e
-# Use A/A* relationship to get exit Mach number, exit sonic velocity, exit velocity
+#where is the probe
+time_to_nozzle_NS = l_nozzle/W
+print(f'Time for NS to hit exit of nozzle = {time_to_nozzle_NS}')
 
-M_e = float(fsolve(A_A_star,x0=6,args=(A_e/A_th,gamma)))
-print(f'Exit Mach = {M_e}')
-p_e = isen.get_static_pressure(M=M_e,p_t=pt,gamma=gamma)
-print(f'Exit static pressure = {p_e} Pa')
-T_e = isen.get_static_temperature(M=M_e,T_t=Tt,gamma=gamma)
-print(f'Exit static temperature = {T_e} K')
-a_e = isen.get_sonic_velocity(T=T_e,gamma=gamma)
-print(f'Exit sonic velocity = {a_e} m/s')
-u_e = M_e*a_e
-print(f'Exit velocity = {u_e} m/s')
+time_to_nozzle_CS = l_nozzle/up
+print(f'Time for CS to hit exit of nozzle = {time_to_nozzle_CS}')
 
-thrusts = [SSME_thrust(mdot=mdot,u_e=u_e,p_e=p_e,p_amb=p_i,A_e=A_e)/1000 for p_i in pressures]
 
-fig,ax = plt.subplots()
-ax.set_ylabel('Pressure [Pa]')
-ax.set_xlabel('Altitude [m]')
-ax.set_title('Ambient Pressure vs. Altitude')
-plt.plot(altitudes,pressures)
-plt.savefig('../images/problem_3/pamb_vs_alt.png', bbox_inches='tight')
-plt.close()
+# Expansion Wave
+p0 = 1000000
+pb = 101000
+p2_p1 = 3.2855668652704 # from MATLAB
 
-thrust_design = SSME_thrust(mdot=mdot,u_e=u_e,p_e=p_e,p_amb=p_e,A_e=A_e)/1000
-print(f'Design thrust = {thrust_design} kN')
-
-def pvh(h=None,p=None):
-    eq = 101325*(1-(2.25577*10**(-5)*h))**5.25588 - p
-    return eq
-
-alt_design = float(fsolve(pvh,x0=10000,args=(p_e)))
-print(f'Design altitude = {alt_design} m')
-
-fig,ax = plt.subplots()
-ax.set_ylabel('Thrust [kN]')
-ax.set_xlabel('Altitude [m]')
-ax.set_title('SSME Thrust vs. Altitude')
-#plt.plot(altitudes,thrusts)
-plt.plot(altitudes[0:12235],thrusts[0:12235],'b',linestyle='dotted',label='Overexpanded')
-plt.plot(altitudes[12237:],thrusts[12237:],color='orange',linestyle='dashed',label='Underexpanded')
-plt.plot(alt_design,thrust_design,'r*',label='Design Condition')
-plt.legend()
-plt.savefig('../images/problem_3/t_vs_alt.png', bbox_inches='tight')
+p3_p4 = p2_p1 * p0/pb
+print(f'p3/p4 = {p3_p4}')
+rho3_rho4 = p3_p4**(1/gamma)
+print(f'rho3/rho4 = {rho3_rho4}')
+T3_T4 = p3_p4**((gamma-1)/gamma)
+print(f'T3/T4 = {T3_T4}')

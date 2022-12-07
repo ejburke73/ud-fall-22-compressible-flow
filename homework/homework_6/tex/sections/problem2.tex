@@ -68,8 +68,11 @@ The nozzle is choked, i.e., \(M_{throat}=1\).
     \]
 
     \[
-        \boxed{A_e =  0.4560\,\unit{\meter\squared}}
+        \boxed{A_e =  0.4560\,\unit{\meter\squared} = 706.8 \, \unit{in\squared}}
     \]
+
+    The calculated exit area of \(706.8\,\unit{in\squared}\) compares well to the exit dimensions in the conference paper which list an exit diameter of \(D_{e}=30\,\unit{in}\).
+    The calculated exiit diameter is \(D_e = 29.99\,\unit{in}\) which is well within an acceptable margin of error.
 
     \item The design back pressure, \(p_{b,design}\), and temperature, \(T_{b,design}\) are the static conditions associated with \(M_e=6\) exit flow assuming no shocks in the nozzle.
     Using isentropic relations and treating the reservoir conditions as total conditions for the flow, the design point conditions at the exit of the nozzle are as follows:
@@ -78,20 +81,18 @@ The nozzle is choked, i.e., \(M_{throat}=1\).
         \boxed{p_{b,design} = 2533.45\,\unit{\pascal} \qquad T_{b,design} = 60.97\,\unit{\kelvin}}
     \]    
     
-    \item The lowest back pressure for which there is only subsonic flow in the nozzle can be determined by first solving for the subsonic Mach number associated with the nozzle geometry.
-    Using the Area-Mach relationship and a numerical solver, we can back out the subsonic solution associated with the given value of \(A_e/A^*\).  
-
+    \item The lowest back pressure for which there is only subsonic flow in the nozzle can be determined by using the critical back pressure ratio, \(p^*/p_0\).
+    
     \[
-        M_{e,sub} = 0.0108 
-    \] 
-
-    Then, we utilize isentropic relations to determine the back pressure associated with this subsonic exit Mach, assuming that the nozzle exit and region just downstream are in equilibrium.
-
-    \[
-        \boxed{p_{b,sub} = 3999668 \, \unit{\pascal}}
+        \frac{p^*}{p_0} = {\left(1 + \frac{\gamma-1}{2}\right)}^{-\frac{\gamma}{\gamma-1}} = 0.52828
     \]
 
-    This value is \(99.9999\%\) of the total condition.
+    Setting \(p_b=p^*\) yields the critical value of back pressure.
+    This is the back pressure for which the throat reaches sonic conditions, so any value of back pressure slightly above this (represented by the term \(\varepsilon\))  will yield only subsonic flow in the nozzle.
+
+    \[
+        \boxed{p_b = 2113127\,\unit{\kilo\pascal} + \varepsilon}
+    \]
 
     \item The back pressure for which there is a normal shock at the nozzle exit plane is given by the value of pressure associated with the design exit Mach goingi through a normal shock wave.
     We use normal shock relations to determine the post-normal shock static pressure for \(M_e=6\) flow.
@@ -167,6 +168,10 @@ The nozzle is choked, i.e., \(M_{throat}=1\).
     \[
         \boxed{t_{NS} = 0.3056\,\unit{\second}}
     \]
+
+    The tunnel's diffuser would increase the static pressure of the downstream flow heading into the receiving tanks.
+    Assuming a constant receiving tank temperature, the increased static pressure would also increase the density in the receiving tanks, reducing the time it takes for a normal shock to appear.
+    However, the normal shock still has to travel upstream (a transient effect) and reach the test section before the high-quality flow in the test section is no longer useful.
 
     \item To determine the length of the driver tubes, we must first find calculate the fluid velocity during the time frame of interest.
     Assuming that conditions in the driver tube are equal to the stagnation conditions of the upstream reservoir, we first calculate the fluid density in the driver tube.
